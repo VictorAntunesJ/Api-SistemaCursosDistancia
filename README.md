@@ -1,12 +1,9 @@
 # Diagrama de Classes  - CD
 
 ```mermaid
-classDiagrama
+classDiagram
 
-Course --|> Module
-Module --|> Classroom
-
-class Course{
+class Curso {
   + int Id
   + string Titulo
   + string Descricao
@@ -16,14 +13,18 @@ class Course{
   + List<Modulo> Modulos
 }
 
-class Module {
+class Modulo {
   + int Id
   + string Titulo
   + List<Aula> Aulas
 }
 
-class Classroom {
+class Aula {
   + int Id
   + string Titulo
   + string Conteudo
 }
+
+Curso "1" -- "*" Modulo : Contém
+Modulo "1" -- "*" Aula : Contém
+```
