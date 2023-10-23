@@ -43,3 +43,19 @@ Modulo "" -- "" Aula
     dotnet add package Microsoft.EntityFrameworkCore.Design
     dotnet add package MySql.EntityFrameworkCore
 ```
+
+
+
+```sh
+
+class Curso {
+    public int Id { get; set; }
+    public string Titulo { get; set; }
+    public string Descricao { get; set; }
+    public DateTime DataInicio { get; set; }
+    public DateTime DataFim { get; set; }
+    public string Instrutor { get; set; }
+    public List<Modulo> Modulos { get; set; }
+}
+
+```
