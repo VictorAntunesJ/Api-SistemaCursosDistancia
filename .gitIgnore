@@ -489,3 +489,5 @@ $RECYCLE.BIN/
 .vscode
 vscode
 appsettings.json
+appsettings.Development
+Api-SistemaCursosDistancia

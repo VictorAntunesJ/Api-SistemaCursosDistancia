@@ -30,7 +30,7 @@ Modulo "" -- "" Aula
 
 ```
 ```sh
- - Comoda novo **projeto**
+ - Comoda novo projeto
 
     dotnet new webapi --name Api/SistemaCursosDistancia
     add file readme.md
