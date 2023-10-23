@@ -25,6 +25,6 @@ class Aula {
   + string Conteudo
 }
 
-Curso "1" -- "*" Modulo : Contém
-Modulo "1" -- "*" Aula : Contém
+Curso "1" -- "*" Modulo
+Modulo "1" -- "*" Aula  
 ```
