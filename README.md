@@ -39,7 +39,7 @@ Modulo "" -- "" Aula
 
 ```
 ```sh
- - Comoda novo projeto
+ - `Comoda `novo `projeto
 
     dotnet new webapi --name Api/SistemaCursosDistancia
     add file readme.md
@@ -60,8 +60,8 @@ Modulo "" -- "" Aula
 
 
 ```sh
-   - add file Models no diretorio do projeto.
-   - add class Cadastro dentro da Models com os seguintes atributos:
+add file Models no diretorio do projeto.
+add class Cadastro dentro da Models com os seguintes atributos:
 
 class Cadastro
           {
@@ -72,7 +72,7 @@ class Cadastro
               public List<Curso> Curso { get; set; }    
           }
 
-  - add class curso dentro da Models com os seguintes atributos:
+add class curso dentro da Models com os seguintes atributos:
 
           class Curso
           {
@@ -86,7 +86,7 @@ class Cadastro
           }
 
 
-  - add class Modulo dentro da Models com os seguintes atributos:
+add class Modulo dentro da Models com os seguintes atributos:
 
           class Modulo
           {
@@ -95,7 +95,7 @@ class Cadastro
               public List<Aula> Aulas { get; set; }
           }
 
-   - add class Modulo dentro da Models com os seguintes atributos:
+add class Modulo dentro da Models com os seguintes atributos:
 
           public class Aula
           {
@@ -109,11 +109,11 @@ class Cadastro
 
 ## Context
 ```sh
-   - add file Context no diretorio do projeto.
-   - add class CursoDistanciaContext dentro da Context para mapear as entidades do aplicativo para as tabelas do banco de dados e estabelecer a conexão com o banco de dados.
+      add file Context no diretorio do projeto.
+      add class CursoDistanciaContext dentro da Context para mapear as entidades do aplicativo para as tabelas do banco de dados e estabelecer a conexão com o banco de dados.
 
-   - Construtor
-    O construtor do contexto é responsável por configurar a conexão com o banco de dados usando as opções fornecidas durante a injeção de dependência.
+   - `Construtor`
+     O construtor do contexto é responsável por configurar a conexão com o banco de dados usando as opções fornecidas durante a injeção de dependência.
  
             public CursoDistanciaContext(DbContextOptions<CursoDistanciaContext> options) :base(options)
             {
@@ -130,7 +130,7 @@ class Cadastro
 
       - `Cadastros`: Representa os registros de usuários cadastrados no sistema.
       - `Aulas`: Representa informações sobre as aulas dos cursos, incluindo títulos, conteúdo e arquivos associados.
-      - `Cursos`: Representa informações sobre os cursos oferecidos, incluindo títulos, descrições, datas de início e término e instrutores.
+      - `Cursos`: Representa informações sobre os cursos oferecidos, incluindo títulos, descrições, datas de início e término e   instrutores.
       - `Modulos`: Representa os módulos de um curso, que contêm aulas relacionadas.
 ```
 
