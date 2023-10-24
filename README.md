@@ -47,8 +47,8 @@ Modulo "" -- "" Aula
 
 
 ```sh
-## add file Models no diretorio do projeto 
-## add class curso dentro da Models com os seguintes atributos:
+# add file Models no diretorio do projeto 
+# add class curso dentro da Models com os seguintes atributos:
 
 class Curso {
     public int Id { get; set; }
@@ -61,7 +61,7 @@ class Curso {
 }
 
 
-## add class Modulo dentro da Models com os seguintes atributos:
+# add class Modulo dentro da Models com os seguintes atributos:
 
 class Modulo
 {
@@ -70,7 +70,7 @@ class Modulo
     public List<Aula> Aulas { get; set; }
 }
 
-## add class Modulo dentro da Models com os seguintes atributos:
+# add class Modulo dentro da Models com os seguintes atributos:
 
 public class Aula
 {
