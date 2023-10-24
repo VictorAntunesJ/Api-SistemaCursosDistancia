@@ -47,8 +47,8 @@ Modulo "" -- "" Aula
 
 
 ```sh
-# add file Models no diretorio do projeto 
-# add class curso dentro da Models com os seguintes atributos:
+ *add file Models no diretorio do projeto* 
+ *add class curso dentro da Models com os seguintes atributos:*
 
 class Curso {
     public int Id { get; set; }
