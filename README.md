@@ -47,6 +47,8 @@ Modulo "" -- "" Aula
 
 
 ```sh
+## add file Models no diretorio do projeto 
+## add class curso dentro da Models com os seguintes atributos:
 
 class Curso {
     public int Id { get; set; }
@@ -58,4 +60,30 @@ class Curso {
     public List<Modulo> Modulos { get; set; }
 }
 
+
+## add class Modulo dentro da Models com os seguintes atributos:
+
+class Modulo
+{
+    public int Id { get; set; }
+    public string Titulo { get; set; }
+    public List<Aula> Aulas { get; set; }
+}
+
+## add class Modulo dentro da Models com os seguintes atributos:
+
+public class Aula
+{
+    public int Id { get; set; }
+    public string Titulo { get; set; }
+    public string Conteudo { get; set; }
+    public string arquivo {get; set;} 
+}
+
+```
+
+## Referencia
+```sh
+    https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
+    https://learn.microsoft.com/pt-br/sql/connect/ado-net/sql/?view=sql-server-ver16
 ```
