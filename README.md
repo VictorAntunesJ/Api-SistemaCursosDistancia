@@ -134,6 +134,16 @@ add class Modulo dentro da Models com os seguintes atributos:
       - `Modulos`: Representa os módulos de um curso, que contêm aulas relacionadas.
 ```
 
+## ConnectionStrings
+```sh
+
+,
+  "ConnectionStrings": {
+    "ConexaoPadrao":"Server=localhost\\SqlExpress; Initial Catalog=ApiCursoAdistancia;Integrated Security=True; TrustServerCertificate=True"
+  }
+
+```
+
 ## Referencia
 ```sh
     https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
