@@ -50,7 +50,8 @@ Modulo "" -- "" Aula
   - add file Models no diretorio do projeto.
   - add class curso dentro da Models com os seguintes atributos:
 
-          class Curso {
+          class Curso
+          {
               public int Id { get; set; }
               public string Titulo { get; set; }
               public string Descricao { get; set; }
