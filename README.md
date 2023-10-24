@@ -3,7 +3,7 @@
 ```mermaid
 classDiagram
 
-lass Curso {
+class Curso {
   + int Id
   + string Nome
   + string Email
