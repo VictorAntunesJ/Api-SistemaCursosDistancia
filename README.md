@@ -158,6 +158,13 @@ add class Modulo dentro da Models com os seguintes atributos:
           ));
 
 ```
+## Migrations
+```sh
+
+dotnet-ef migrations add ApiCursoDistancia
+dotnet-ef database update
+
+```
 
 ## Referencia
 ```sh
