@@ -50,7 +50,7 @@ Modulo "" -- "" Aula
 
     dotnet add package Microsoft.EntityFrameworkCore
     dotnet add package Microsoft.EntityFrameworkCore.Design
-    dotnet add package MySql.EntityFrameworkCore
+    dotnet add package Microsoft.EnttyFrimeWorkCore.SqlServer
 
  - Pacote de instalacao Microsoft.Data.SqlClient do SQL Server e ADO.NET
 
@@ -141,6 +141,21 @@ add class Modulo dentro da Models com os seguintes atributos:
   "ConnectionStrings": {
     "ConexaoPadrao":"Server=localhost\\SqlExpress; Initial Catalog=ApiCursoAdistancia;Integrated Security=True; TrustServerCertificate=True"
   }
+
+```
+
+## Configuração do DbContext
+
+```sh
+  Nesta parte do código, estamos configurando o contexto do banco de dados para a aplicação. O contexto do banco 
+  de dados é uma parte essencial de aplicativos que interagem com bancos de dados SQL. Neste caso, estamos usando 
+  o Entity Framework Core para lidar com as operações de banco de dados.
+
+  builder.Services.AddDbContext<MaisEventosVsCodeContextApi>(
+      options =>
+          options.UseSqlServer(
+              builder.Configuration.GetConnectionString("ConexaoPadrao")
+          ));
 
 ```
 
