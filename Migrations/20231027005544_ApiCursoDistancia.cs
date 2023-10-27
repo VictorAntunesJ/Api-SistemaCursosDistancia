@@ -12,7 +12,7 @@ namespace Api_SistemaCursosDistancia.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Cadastros",
+                name: "CadastroCDs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -23,11 +23,11 @@ namespace Api_SistemaCursosDistancia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cadastros", x => x.Id);
+                    table.PrimaryKey("PK_CadastroCDs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cursos",
+                name: "CursoCDs",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -37,40 +37,40 @@ namespace Api_SistemaCursosDistancia.Migrations
                     dataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     dataFim = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Instrutor = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    CadastroId = table.Column<int>(type: "int", nullable: true)
+                    CadastroCDId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cursos", x => x.id);
+                    table.PrimaryKey("PK_CursoCDs", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Cursos_Cadastros_CadastroId",
-                        column: x => x.CadastroId,
-                        principalTable: "Cadastros",
+                        name: "FK_CursoCDs_CadastroCDs_CadastroCDId",
+                        column: x => x.CadastroCDId,
+                        principalTable: "CadastroCDs",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Modulos",
+                name: "ModuloCDs",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     titulo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CursoId = table.Column<int>(type: "int", nullable: false)
+                    CursoId = table.Column<int>(type: "int", nullable: false),
+                    CursoCDid = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Modulos", x => x.id);
+                    table.PrimaryKey("PK_ModuloCDs", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Modulos_Cursos_CursoId",
-                        column: x => x.CursoId,
-                        principalTable: "Cursos",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_ModuloCDs_CursoCDs_CursoCDid",
+                        column: x => x.CursoCDid,
+                        principalTable: "CursoCDs",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Aulas",
+                name: "AulaCDs",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -78,49 +78,49 @@ namespace Api_SistemaCursosDistancia.Migrations
                     titulo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     conteudo = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     arquivo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ModuloId = table.Column<int>(type: "int", nullable: false)
+                    ModuloId = table.Column<int>(type: "int", nullable: false),
+                    ModuloCDid = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Aulas", x => x.id);
+                    table.PrimaryKey("PK_AulaCDs", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Aulas_Modulos_ModuloId",
-                        column: x => x.ModuloId,
-                        principalTable: "Modulos",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_AulaCDs_ModuloCDs_ModuloCDid",
+                        column: x => x.ModuloCDid,
+                        principalTable: "ModuloCDs",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Aulas_ModuloId",
-                table: "Aulas",
-                column: "ModuloId");
+                name: "IX_AulaCDs_ModuloCDid",
+                table: "AulaCDs",
+                column: "ModuloCDid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cursos_CadastroId",
-                table: "Cursos",
-                column: "CadastroId");
+                name: "IX_CursoCDs_CadastroCDId",
+                table: "CursoCDs",
+                column: "CadastroCDId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Modulos_CursoId",
-                table: "Modulos",
-                column: "CursoId");
+                name: "IX_ModuloCDs_CursoCDid",
+                table: "ModuloCDs",
+                column: "CursoCDid");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Aulas");
+                name: "AulaCDs");
 
             migrationBuilder.DropTable(
-                name: "Modulos");
+                name: "ModuloCDs");
 
             migrationBuilder.DropTable(
-                name: "Cursos");
+                name: "CursoCDs");
 
             migrationBuilder.DropTable(
-                name: "Cadastros");
+                name: "CadastroCDs");
         }
     }
 }

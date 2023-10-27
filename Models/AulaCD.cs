@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Api_SistemaCursosDistancia.Models
 {
-    public class Aula
+    public class AulaCD
     {
         [Key]
         public int id { get; set; }
@@ -22,6 +22,6 @@ namespace Api_SistemaCursosDistancia.Models
 
         [ForeignKey("ModuloId")]
         public int ModuloId { get; set; }
-        public Modulo Modulo { get; set; }
+        public ModuloCD ModuloCD { get; set; }
     }
 }

@@ -50,7 +50,7 @@ Modulo "" -- "" Aula
 
     dotnet add package Microsoft.EntityFrameworkCore
     dotnet add package Microsoft.EntityFrameworkCore.Design
-    dotnet add package Microsoft.EnttyFrimeWorkCore.SqlServer
+    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
  - Pacote de instalacao Microsoft.Data.SqlClient do SQL Server e ADO.NET
 
@@ -69,12 +69,12 @@ class Cadastro
               public string Nome { get; set; }
               public string email { get; set; }
               public string senha { get; set; }
-              public List<Curso> Curso { get; set; }    
+              public List<CursoCD> CursoCDs { get; set; }    
           }
 
 add class curso dentro da Models com os seguintes atributos:
 
-          class Curso
+          class CursoCD
           {
               public int Id { get; set; }
               public string Titulo { get; set; }
@@ -82,22 +82,22 @@ add class curso dentro da Models com os seguintes atributos:
               public DateTime DataInicio { get; set; }
               public DateTime DataFim { get; set; }
               public string Instrutor { get; set; }
-              public List<Modulo> Modulos { get; set; }
+              public List<ModuloCD> ModuloCDs { get; set; }
           }
 
 
 add class Modulo dentro da Models com os seguintes atributos:
 
-          class Modulo
+          class ModuloCD
           {
               public int Id { get; set; }
               public string Titulo { get; set; }
-              public List<Aula> Aulas { get; set; }
+              public List<AulaCD> AulaCDs { get; set; }
           }
 
 add class Modulo dentro da Models com os seguintes atributos:
 
-          public class Aula
+          public class AulaCD
           {
               public int Id { get; set; }
               public string Titulo { get; set; }
@@ -120,10 +120,10 @@ add class Modulo dentro da Models com os seguintes atributos:
 
             }
 
-            public DbSet<Cadastro> Cadastros {get; set;}
-            public DbSet<Aula> Aulas {get; set;}
-            public DbSet<Curso> Cursos {get; set;}
-            public DbSet<Modulo> Modulos {get; set;}
+            public DbSet<CadastroCD> CadastroCDs {get; set;}
+            public DbSet<AulaCD> AulaCDs {get; set;}
+            public DbSet<CursoCD> CursoCDs {get; set;}
+            public DbSet<ModuloCD> ModuloCDs {get; set;}
 
 
   - Entidades Mapeadas
@@ -172,3 +172,38 @@ dotnet-ef database update
     https://learn.microsoft.com/pt-br/sql/connect/ado-net/sql/?view=sql-server-ver16
     https://www.nuget.org/
 ```
+
+
+
+    public class Aula
+    {
+        
+    }
+
+
+
+
+    public class Cadastro
+    {
+        
+    }
+
+
+     public class Curso
+    {
+        
+    }
+
+
+    public class Modulo
+    {
+        
+
+    }
+
+
+
+    builder.Services.AddDbContext<CursoDistanciaContext>(
+    options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString("ConexaoPadrao")
+    ));

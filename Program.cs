@@ -1,6 +1,4 @@
-
 using Api_SistemaCursosDistancia.Context;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,10 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddDbContext<CursoDistanciaContext>(
-    options => options.UseSqlServer(
-        builder.Configuration.GetConnectionString("ConexaoPadrao")
-    ));
-    
+      options =>
+          options.UseSqlServer(
+              builder.Configuration.GetConnectionString("ConexaoPadrao")
+          ));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -24,7 +22,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

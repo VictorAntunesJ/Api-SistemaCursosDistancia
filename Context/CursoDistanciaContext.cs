@@ -7,16 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api_SistemaCursosDistancia.Context
 {
-    public class CursoDistanciaContext :DbContext
+    public class CursoDistanciaContext: DbContext
     {
-        public CursoDistanciaContext(DbContextOptions<CursoDistanciaContext> options) :base(options)
+       public CursoDistanciaContext(DbContextOptions<CursoDistanciaContext> options) :base(options)
         {
 
         }
 
-        public DbSet<Cadastro> Cadastros {get; set;}
-        public DbSet<Aula> Aulas {get; set;}
-        public DbSet<Curso> Cursos {get; set;}
-        public DbSet<Modulo> Modulos {get; set;}
+        public DbSet<CadastroCD> CadastroCDs {get; set;}
+        public DbSet<AulaCD> AulaCDs {get; set;}
+        public DbSet<CursoCD> CursoCDs {get; set;}
+        public DbSet<ModuloCD> ModuloCDs {get; set;}
     }
 }
