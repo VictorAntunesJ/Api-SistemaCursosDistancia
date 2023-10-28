@@ -166,9 +166,54 @@ dotnet-ef database update
 
 ```
 
+## Documentacao da API
+```sh
+Configuração do Swagger
+
+A configuração do Swagger foi feita da seguinte forma:
+
+- **Título**: Sistema de Cursos a Distância API
+- **Versão**: v1
+- **Descrição**: API desenvolvida para o site do Sistema de Cursos a Distância.
+- **Termos de Serviço**: [Termos de Serviço](https://meusite.com)
+- **Contato**: Victor Sérgio, [meusite.com](https://meusite.com)
+- **Licença**: Curso a Distância ApTech, [Detalhes da Licença](https://meusite.com)
+
+Endpoints da API
+
+A API fornece os seguintes endpoints:
+
+- **[GET] /api/cursos**: Retorna a lista de todos os cursos.
+- **[GET] /api/cursos/{id}**: Retorna os detalhes de um curso específico.
+- **[POST] /api/cursos**: Cria um novo curso.
+- **[PUT] /api/cursos/{id}**: Atualiza os detalhes de um curso.
+- **[DELETE] /api/cursos/{id}**: Exclui um curso.
+
+Você pode encontrar mais informações sobre cada endpoint, incluindo detalhes dos parâmetros, na documentação interativa do Swagger.
+
+Como Usar
+
+Aqui você pode fornecer instruções sobre como usar a API. Isso pode incluir exemplos de solicitações, respostas e autenticação, dependendo da complexidade da sua API.
+
+```
+
+
+
+
 ## Referencia
 ```sh
     https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
     https://learn.microsoft.com/pt-br/sql/connect/ado-net/sql/?view=sql-server-ver16
     https://www.nuget.org/
 ```    
+
+## Contribuições
+
+Você é bem-vindo para contribuir para este projeto. Sinta-se à vontade para abrir problemas (issues) ou enviar solicitações de pull (pull requests) para melhorar esta API.
+
+```
+
+
+
+
+

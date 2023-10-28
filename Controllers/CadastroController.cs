@@ -11,15 +11,18 @@ namespace Api_SistemaCursosDistancia.Controllers
     [ApiController]
     [Route("[controller]")]
     public class CadastroController : ControllerBase
-    {
-
-        
+    {      
         private readonly CursoDistanciaContext _context;
         public CadastroController(CursoDistanciaContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Cadastrar usuário na aplicação
+        /// </summary>
+        /// <param name="cadastro">Dados do usuário</param>
+        /// <returns>Dados do usuário cadastrados</returns>
         [HttpPost]
         public IActionResult Create(Cadastro cadastro)
         {

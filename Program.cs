@@ -1,5 +1,7 @@
+using System.Reflection;
 using Api_SistemaCursosDistancia.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,29 @@ builder.Services.AddDbContext<CursoDistanciaContext>(
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c=>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo {
+        Title = "SistemaCursoDistancia.Api.", 
+        Version = "v1.",
+        Description = "API desenvolvida para o site do sistema curso a distancia. ",
+        TermsOfService = new Uri("https://meusite.com"),
+        Contact = new OpenApiContact
+        {
+            Name = "Victor Sérgio",
+            Url = new Uri("https://meusite.com")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Curso a distancia ApTech",
+            Url = new Uri("https://meusite.com")
+        }
+    });
+    // Adicionar configurações extras da documentação, para ler o XMls.
+    var xmlArquivo = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlArquivo));
+
+});
 
 var app = builder.Build();
 
