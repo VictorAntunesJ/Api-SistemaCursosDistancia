@@ -172,12 +172,12 @@ Configuração do Swagger
 
 A configuração do Swagger foi feita da seguinte forma:
 
-- **Título**: Sistema de Cursos a Distância API
-- **Versão**: v1
-- **Descrição**: API desenvolvida para o site do Sistema de Cursos a Distância.
-- **Termos de Serviço**: [Termos de Serviço](https://meusite.com)
-- **Contato**: Victor Sérgio, [meusite.com](https://meusite.com)
-- **Licença**: Curso a Distância ApTech, [Detalhes da Licença](https://meusite.com)
+- `Título:` Sistema de Cursos a Distância API
+- `Versão:` v1
+- `Descrição:` API desenvolvida para o site do Sistema de Cursos a Distância.
+- `Termos de Serviço:` [Termos de Serviço](https://meusite.com)
+- `Contato:` Victor Sérgio, [meusite.com](https://meusite.com)
+- ``Licença:` Curso a Distância ApTech, [Detalhes da Licença](https://meusite.com)
 
 Endpoints da API
 
