@@ -171,39 +171,4 @@ dotnet-ef database update
     https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
     https://learn.microsoft.com/pt-br/sql/connect/ado-net/sql/?view=sql-server-ver16
     https://www.nuget.org/
-```
-
-
-
-    public class Aula
-    {
-        
-    }
-
-
-
-
-    public class Cadastro
-    {
-        
-    }
-
-
-     public class Curso
-    {
-        
-    }
-
-
-    public class Modulo
-    {
-        
-
-    }
-
-
-
-    builder.Services.AddDbContext<CursoDistanciaContext>(
-    options => options.UseSqlServer(
-        builder.Configuration.GetConnectionString("ConexaoPadrao")
-    ));
+```    

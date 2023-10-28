@@ -7,19 +7,20 @@ using System.Threading.Tasks;
 
 namespace Api_SistemaCursosDistancia.Models
 {
-    public class ModuloCD
+    public class Modulo
     {
-        [Key]
+       [Key]
         public int id { get; set; }
 
         [Required]
         [StringLength(100)]
         public string titulo { get; set; }
-        public List<AulaCD> aulaCDs { get; set; }
+        public List<Aula> aulas { get; set; }
 
-        [ForeignKey("CursoId")]
-        public int CursoId { get; set; }
-        public CursoCD CursoCD { get; set; }
+        
 
+        // [ForeignKey("CursoId")]
+        // public int CursoId { get; set; }
+        // public Curso Curso { get; set; }
     }
 }

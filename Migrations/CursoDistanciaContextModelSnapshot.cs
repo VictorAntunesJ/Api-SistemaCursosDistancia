@@ -22,7 +22,7 @@ namespace Api_SistemaCursosDistancia.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.AulaCD", b =>
+            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.Aula", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -30,10 +30,7 @@ namespace Api_SistemaCursosDistancia.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<int?>("ModuloCDid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ModuloId")
+                    b.Property<int?>("Moduloid")
                         .HasColumnType("int");
 
                     b.Property<string>("arquivo")
@@ -50,12 +47,12 @@ namespace Api_SistemaCursosDistancia.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("ModuloCDid");
+                    b.HasIndex("Moduloid");
 
-                    b.ToTable("AulaCDs");
+                    b.ToTable("Aulas");
                 });
 
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.CadastroCD", b =>
+            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.Cadastro", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,19 +77,16 @@ namespace Api_SistemaCursosDistancia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CadastroCDs");
+                    b.ToTable("Cadastros");
                 });
 
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.CursoCD", b =>
+            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.Curso", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<int?>("CadastroCDId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(50)
@@ -115,24 +109,16 @@ namespace Api_SistemaCursosDistancia.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("CadastroCDId");
-
-                    b.ToTable("CursoCDs");
+                    b.ToTable("Cursos");
                 });
 
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.ModuloCD", b =>
+            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.Modulo", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<int?>("CursoCDid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
 
                     b.Property<string>("titulo")
                         .IsRequired()
@@ -141,49 +127,19 @@ namespace Api_SistemaCursosDistancia.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("CursoCDid");
-
-                    b.ToTable("ModuloCDs");
+                    b.ToTable("Modulos");
                 });
 
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.AulaCD", b =>
+            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.Aula", b =>
                 {
-                    b.HasOne("Api_SistemaCursosDistancia.Models.ModuloCD", "ModuloCD")
-                        .WithMany("aulaCDs")
-                        .HasForeignKey("ModuloCDid");
-
-                    b.Navigation("ModuloCD");
+                    b.HasOne("Api_SistemaCursosDistancia.Models.Modulo", null)
+                        .WithMany("aulas")
+                        .HasForeignKey("Moduloid");
                 });
 
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.CursoCD", b =>
+            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.Modulo", b =>
                 {
-                    b.HasOne("Api_SistemaCursosDistancia.Models.CadastroCD", null)
-                        .WithMany("CursoCDs")
-                        .HasForeignKey("CadastroCDId");
-                });
-
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.ModuloCD", b =>
-                {
-                    b.HasOne("Api_SistemaCursosDistancia.Models.CursoCD", "CursoCD")
-                        .WithMany("ModuloCDs")
-                        .HasForeignKey("CursoCDid");
-
-                    b.Navigation("CursoCD");
-                });
-
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.CadastroCD", b =>
-                {
-                    b.Navigation("CursoCDs");
-                });
-
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.CursoCD", b =>
-                {
-                    b.Navigation("ModuloCDs");
-                });
-
-            modelBuilder.Entity("Api_SistemaCursosDistancia.Models.ModuloCD", b =>
-                {
-                    b.Navigation("aulaCDs");
+                    b.Navigation("aulas");
                 });
 #pragma warning restore 612, 618
         }
