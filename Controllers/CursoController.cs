@@ -11,10 +11,10 @@ namespace Api_SistemaCursosDistancia.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CadastroController : ControllerBase
+    public class CursoController : ControllerBase
     {
         private readonly CursoDistanciaContext _context;
-        public CadastroController(CursoDistanciaContext context)
+        public CursoController(CursoDistanciaContext context)
         {
             _context = context;
         }
@@ -22,18 +22,18 @@ namespace Api_SistemaCursosDistancia.Controllers
         /// <summary>
         /// Cadastrar usuário na aplicação
         /// </summary>
-        /// <param name="cadastro">Dados do usuário</param>
+        /// <param name="curso">Dados do usuário</param>
         /// <returns>Dados do usuário cadastrados</returns>
 
 
         [HttpPost]
-        public IActionResult Create(Cadastro cadastro)
+        public IActionResult Create(Curso curso)
         {
             try
             {
-                _context.Add(cadastro);
+                _context.Add(curso);
                 _context.SaveChanges();
-                return Ok(cadastro);
+                return Ok(curso);
 
             }
             catch (System.Exception ex)
@@ -56,13 +56,13 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var cadastro = _context.Cadastros.ToList();
-                if (cadastro == null || cadastro.Count == 0)
+                var curso = _context.Cursos.ToList();
+                if (curso == null || curso.Count == 0)
                 {
                     return NotFound("Nenhum usuário cadastrado.");
                 }
 
-                return Ok(cadastro);
+                return Ok(curso);
             }
             catch (System.Exception ex)
             {
@@ -84,25 +84,27 @@ namespace Api_SistemaCursosDistancia.Controllers
         /// Alterar dados da aula.
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="cadastro">Todas informações de um usuário</param>
+        /// <param name="curso">Todas informações de um usuário</param>
         /// <returns>Usuario Alterado</returns>
         [HttpPut("{id}")]
-        public IActionResult Atualizar(int id, Cadastro cadastro)
+        public IActionResult Atualizar(int id, Curso curso)
         {
             try
             {
-               var cadastroBanco = _context.Cadastros.Find(id);
-               if(cadastroBanco == null)
+               var cursoBanco = _context.Cursos.Find(id);
+               if(cursoBanco == null)
                     return NotFound("Item não encontrado com ID fornecido");
                     
-                    cadastroBanco.Nome = cadastro.Nome;
-                    cadastroBanco.Email = cadastro.Email;
-                    cadastroBanco.Senha = cadastro.Senha;
+                    cursoBanco.titulo = curso.titulo;
+                    cursoBanco.Descricao = curso.Descricao;
+                    cursoBanco.dataInicio = curso.dataInicio;
+                    cursoBanco.dataFim = curso.dataFim;
+                    cursoBanco.Instrutor = curso.Instrutor;
 
-                _context.Cadastros.Update(cadastroBanco);
+                _context.Cursos.Update(cursoBanco);
                 _context.SaveChanges();
 
-                return Ok(cadastroBanco);
+                return Ok(cursoBanco);
             }
             catch (System.Exception ex)
             {
@@ -123,12 +125,12 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var cadastroBanco = _context.Cadastros.Find(id);
+                var cursoBanco = _context.Cursos.Find(id);
 
-                if (cadastroBanco == null)
+                if (cursoBanco == null)
                     return NotFound("Iten não encontrado com ID fornecido.");
 
-                _context.Cadastros.Remove(cadastroBanco);
+                _context.Cursos.Remove(cursoBanco);
                 _context.SaveChanges();
 
                 return NoContent();

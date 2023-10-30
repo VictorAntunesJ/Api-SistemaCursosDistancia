@@ -11,29 +11,29 @@ namespace Api_SistemaCursosDistancia.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CadastroController : ControllerBase
+    public class ModuloController : ControllerBase
     {
         private readonly CursoDistanciaContext _context;
-        public CadastroController(CursoDistanciaContext context)
+        public ModuloController(CursoDistanciaContext context)
         {
             _context = context;
         }
 
         /// <summary>
-        /// Cadastrar usuário na aplicação
+        /// Cadastrar modulo na aplicação
         /// </summary>
-        /// <param name="cadastro">Dados do usuário</param>
-        /// <returns>Dados do usuário cadastrados</returns>
+        /// <param name="modulo">Dados do usuário</param>
+        /// <returns>Dados do modulos cadastrados</returns>
 
 
         [HttpPost]
-        public IActionResult Create(Cadastro cadastro)
+        public IActionResult Create(Modulo modulo)
         {
             try
             {
-                _context.Add(cadastro);
+                _context.Add(modulo);
                 _context.SaveChanges();
-                return Ok(cadastro);
+                return Ok(modulo);
 
             }
             catch (System.Exception ex)
@@ -50,19 +50,19 @@ namespace Api_SistemaCursosDistancia.Controllers
         /// Listar todos os dados da aplicação
         /// </summary>
         ///<param>Dados do usuário</param>
-        /// <returns>Dados do usuários cadastrados</returns>
+        /// <returns>Dados do modulos cadastrados</returns>
         [HttpGet]
         public IActionResult Listar()
         {
             try
             {
-                var cadastro = _context.Cadastros.ToList();
-                if (cadastro == null || cadastro.Count == 0)
+                var modulo = _context.Modulos.ToList();
+                if (modulo == null || modulo.Count == 0)
                 {
                     return NotFound("Nenhum usuário cadastrado.");
                 }
 
-                return Ok(cadastro);
+                return Ok(modulo);
             }
             catch (System.Exception ex)
             {
@@ -72,7 +72,7 @@ namespace Api_SistemaCursosDistancia.Controllers
                     erro = ex.Message,
                 });
             }
-        } 
+        }
 
 
 
@@ -81,28 +81,27 @@ namespace Api_SistemaCursosDistancia.Controllers
 
 
         /// <summary>
-        /// Alterar dados da aula.
+        /// Alterar dados do modulo.
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="cadastro">Todas informações de um usuário</param>
+        /// <param name="modulo">Todas informações de um modulo.</param>
         /// <returns>Usuario Alterado</returns>
         [HttpPut("{id}")]
-        public IActionResult Atualizar(int id, Cadastro cadastro)
+        public IActionResult Atualizar(int id, Modulo modulo)
         {
             try
             {
-               var cadastroBanco = _context.Cadastros.Find(id);
-               if(cadastroBanco == null)
+                var moduloBanco = _context.Modulos.Find(id);
+                if (moduloBanco == null)
                     return NotFound("Item não encontrado com ID fornecido");
-                    
-                    cadastroBanco.Nome = cadastro.Nome;
-                    cadastroBanco.Email = cadastro.Email;
-                    cadastroBanco.Senha = cadastro.Senha;
 
-                _context.Cadastros.Update(cadastroBanco);
+                moduloBanco.titulo = modulo.titulo;
+                moduloBanco.aulas = modulo.aulas;
+
+                _context.Modulos.Update(moduloBanco);
                 _context.SaveChanges();
 
-                return Ok(cadastroBanco);
+                return Ok(moduloBanco);
             }
             catch (System.Exception ex)
             {
@@ -114,7 +113,7 @@ namespace Api_SistemaCursosDistancia.Controllers
             }
         }
         /// <summary>
-        /// Excluir um usuário da aplicação.
+        /// Excluir um modulo da aplicação.
         /// </summary>
         /// <param name="id">Id do usuário</param>
         /// <returns>Mensagem de exclusão</returns>
@@ -123,15 +122,19 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var cadastroBanco = _context.Cadastros.Find(id);
-
-                if (cadastroBanco == null)
-                    return NotFound("Iten não encontrado com ID fornecido.");
-
-                _context.Cadastros.Remove(cadastroBanco);
+                var moduloBanco = _context.Modulos.Find(id);
+                if (moduloBanco == null)
+                {
+                    return NotFound("Item não encontrado com o ID fornecido.");
+                }
+                foreach (var aula in moduloBanco.aulas)
+                {
+                    _context.Remove(aula);
+                }
+                _context.Modulos.Remove(moduloBanco);
                 _context.SaveChanges();
-
-                return NoContent();
+                return Ok("Item excluído com sucesso.");
+                //Não consegui eliminar o erro  
             }
             catch (System.Exception ex)
             {
@@ -139,7 +142,7 @@ namespace Api_SistemaCursosDistancia.Controllers
                 {
                     msg = "Falha na conexão",
                     erro = ex.Message,
-                });                
+                });
             }
         }
     }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Api_SistemaCursosDistancia.Context;
@@ -11,30 +10,29 @@ namespace Api_SistemaCursosDistancia.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CadastroController : ControllerBase
+    public class AulaController : ControllerBase
     {
+
         private readonly CursoDistanciaContext _context;
-        public CadastroController(CursoDistanciaContext context)
+        public AulaController(CursoDistanciaContext context)
         {
             _context = context;
         }
 
         /// <summary>
-        /// Cadastrar usuário na aplicação
+        /// Cadastrar aula na aplicação.
         /// </summary>
-        /// <param name="cadastro">Dados do usuário</param>
-        /// <returns>Dados do usuário cadastrados</returns>
-
+        /// <param name="aula">Dados do usuário.</param>
+        /// <returns>Dados do usuário cadastrado</returns>
 
         [HttpPost]
-        public IActionResult Create(Cadastro cadastro)
+        public IActionResult Create(Aula aula)
         {
             try
             {
-                _context.Add(cadastro);
+                _context.Add(aula);
                 _context.SaveChanges();
-                return Ok(cadastro);
-
+                return Ok(aula);
             }
             catch (System.Exception ex)
             {
@@ -47,62 +45,21 @@ namespace Api_SistemaCursosDistancia.Controllers
         }
 
         /// <summary>
-        /// Listar todos os dados da aplicação
+        /// Listar todos os dados da aplicação.
         /// </summary>
-        ///<param>Dados do usuário</param>
-        /// <returns>Dados do usuários cadastrados</returns>
+        /// <returns>Todos dados cadastrados.</returns>
         [HttpGet]
         public IActionResult Listar()
         {
             try
             {
-                var cadastro = _context.Cadastros.ToList();
-                if (cadastro == null || cadastro.Count == 0)
+                var aula = _context.Aulas.ToList();
+                if (aula == null || aula.Count == 0)
                 {
                     return NotFound("Nenhum usuário cadastrado.");
                 }
 
-                return Ok(cadastro);
-            }
-            catch (System.Exception ex)
-            {
-                return StatusCode(500, new
-                {
-                    msg = "Falha na conexão",
-                    erro = ex.Message,
-                });
-            }
-        } 
-
-
-
-
-
-
-
-        /// <summary>
-        /// Alterar dados da aula.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cadastro">Todas informações de um usuário</param>
-        /// <returns>Usuario Alterado</returns>
-        [HttpPut("{id}")]
-        public IActionResult Atualizar(int id, Cadastro cadastro)
-        {
-            try
-            {
-               var cadastroBanco = _context.Cadastros.Find(id);
-               if(cadastroBanco == null)
-                    return NotFound("Item não encontrado com ID fornecido");
-                    
-                    cadastroBanco.Nome = cadastro.Nome;
-                    cadastroBanco.Email = cadastro.Email;
-                    cadastroBanco.Senha = cadastro.Senha;
-
-                _context.Cadastros.Update(cadastroBanco);
-                _context.SaveChanges();
-
-                return Ok(cadastroBanco);
+                return Ok(aula);
             }
             catch (System.Exception ex)
             {
@@ -113,6 +70,41 @@ namespace Api_SistemaCursosDistancia.Controllers
                 });
             }
         }
+
+        /// <summary>
+        /// Alterar dados da aula.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="aula">Todas informações de um usuário</param>
+        /// <returns>Usuario Alterado</returns>
+        [HttpPut("{id}")]
+        public IActionResult Atualizar(int id, Aula aula)
+        {
+            try
+            {
+               var aulaBanco = _context.Aulas.Find(id);
+               if(aulaBanco == null)
+                    return NotFound("Item não encontrado com ID fornecido");
+                    
+                    aulaBanco.titulo = aula.titulo;
+                    aulaBanco.conteudo = aula.conteudo;
+                    aulaBanco.arquivo = aula.arquivo;
+
+                _context.Aulas.Update(aulaBanco);
+                _context.SaveChanges();
+
+                return Ok(aulaBanco);
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    msg = "Falha na conexão",
+                    erro = ex.Message,
+                });
+            }
+        }
+
         /// <summary>
         /// Excluir um usuário da aplicação.
         /// </summary>
@@ -123,12 +115,12 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var cadastroBanco = _context.Cadastros.Find(id);
+                var aulaBanco = _context.Aulas.Find(id);
 
-                if (cadastroBanco == null)
+                if (aulaBanco == null)
                     return NotFound("Iten não encontrado com ID fornecido.");
 
-                _context.Cadastros.Remove(cadastroBanco);
+                _context.Aulas.Remove(aulaBanco);
                 _context.SaveChanges();
 
                 return NoContent();
@@ -139,7 +131,7 @@ namespace Api_SistemaCursosDistancia.Controllers
                 {
                     msg = "Falha na conexão",
                     erro = ex.Message,
-                });                
+                });
             }
         }
     }
