@@ -197,6 +197,20 @@ Aqui você pode fornecer instruções sobre como usar a API. Isso pode incluir e
 
 ```
 
+## Adicionando ICadastroRepository - Interface de Repositório de Cadastro
+
+```sh
+
+A `ICadastroRepository` é uma interface que define os métodos para realizar operações CRUD (Create, Read, Update, Delete) em objetos do tipo `Cadastro` em um sistema de cursos a distância.
+
+- `GetALL()`: Retorna uma coleção de todos os registros de cadastro.
+- `GetById(int Id)`: Retorna um registro de cadastro com base no ID especificado.
+- `Insert(int Id, Cadastro cadastro)`: Insere um novo registro de cadastro no repositório.
+- `Update(int ID, Cadastro cadastro)`: Atualiza um registro de cadastro existente com base no ID.
+- `Delete(int Id)`: Exclui um registro de cadastro com base no ID e retorna um valor booleano indicando o sucesso da operação.
+
+```
+
 
 
 
