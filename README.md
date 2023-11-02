@@ -197,17 +197,27 @@ Aqui você pode fornecer instruções sobre como usar a API. Isso pode incluir e
 
 ```
 
-## Adicionando ICadastroRepository - Interface de Repositório de Cadastro
+## IRepository - Interface de Repositório Genérica 
 
 ```sh
 
-A `ICadastroRepository` é uma interface que define os métodos para realizar operações CRUD (Create, Read, Update, Delete) em objetos do tipo `Cadastro` em um sistema de cursos a distância.
+A `IRepository` é uma interface genérica que define métodos comuns para realizar operações CRUD (Create, Read, Update, Delete) em objetos de diversas classes, incluindo `Cadastro`, `Aula`, `Curso` e `Módulo`, no contexto de um sistema de cursos a distância.
 
-- `GetALL()`: Retorna uma coleção de todos os registros de cadastro.
-- `GetById(int Id)`: Retorna um registro de cadastro com base no ID especificado.
-- `Insert(int Id, Cadastro cadastro)`: Insere um novo registro de cadastro no repositório.
-- `Update(int ID, Cadastro cadastro)`: Atualiza um registro de cadastro existente com base no ID.
-- `Delete(int Id)`: Exclui um registro de cadastro com base no ID e retorna um valor booleano indicando o sucesso da operação.
+### Métodos Comuns
+
+A interface `IRepository` inclui os seguintes métodos comuns:
+
+- `GetALL()`: Retorna uma coleção de todos os registros do tipo especificado.
+- `GetById(int Id)`: Retorna um registro com base no ID especificado.
+- `Insert(int Id, T entity)`: Insere um novo registro no repositório.
+- `Update(int ID, T entity)`: Atualiza um registro existente com base no ID.
+- `Delete(int Id)`: Exclui um registro com base no ID e retorna um valor booleano indicando o sucesso da operação.
+
+### Implementação Específica
+
+A interface genérica `IRepository` pode ser implementada para realizar operações de CRUD em várias classes, incluindo `Cadastro`, `Aula`, `Curso` e `Módulo`. Cada classe específica pode fornecer sua própria implementação da interface, adaptada às suas necessidades.
+
+Isso oferece flexibilidade e reutilização de código ao lidar com diferentes tipos de entidades no sistema de cursos a distância.
 
 ```
 
