@@ -13,11 +13,13 @@ namespace Api_SistemaCursosDistancia.Controllers
     [Route("[controller]")]
     public class CadastroController : ControllerBase
     {
+
         private readonly CursoDistanciaContext _context;
+
         public CadastroController(CursoDistanciaContext context)
         {
             _context = context;
-        }
+        }        
 
         /// <summary>
         /// Cadastrar usuário na aplicação
@@ -31,9 +33,9 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                _context.Add(cadastro);
+               _context.Add(cadastro);
                 _context.SaveChanges();
-                return Ok(cadastro);
+                return Ok (cadastro);
 
             }
             catch (System.Exception ex)
@@ -73,12 +75,6 @@ namespace Api_SistemaCursosDistancia.Controllers
                 });
             }
         } 
-
-
-
-
-
-
 
         /// <summary>
         /// Alterar dados da aula.
