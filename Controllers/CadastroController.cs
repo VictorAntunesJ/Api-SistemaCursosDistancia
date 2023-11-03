@@ -58,11 +58,6 @@ namespace Api_SistemaCursosDistancia.Controllers
             try
             {
                 var cadastro = _cadastroRepository.GetALL().ToList();
-                if (cadastro == null || cadastro.Count == 0)
-                {
-                    return NotFound("Nenhum usuário cadastrado.");
-                }
-
                 return Ok(cadastro);
             }
             catch (System.Exception ex)
@@ -86,18 +81,10 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var cadastroBanco = _context.Cadastros.Find(id);
-                if (cadastroBanco == null)
-                    return NotFound("Item não encontrado com ID fornecido");
 
-                cadastroBanco.Nome = cadastro.Nome;
-                cadastroBanco.Email = cadastro.Email;
-                cadastroBanco.Senha = cadastro.Senha;
+                var updateCadastro = _cadastroRepository.Update(id, cadastro);
+                return Ok(updateCadastro);
 
-                _context.Cadastros.Update(cadastroBanco);
-                _context.SaveChanges();
-
-                return Ok(cadastroBanco);
             }
             catch (System.Exception ex)
             {
@@ -118,15 +105,16 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var cadastroBanco = _context.Cadastros.Find(id);
+                bool exclusaoBemSucedida = _cadastroRepository.Delete(id);
 
-                if (cadastroBanco == null)
-                    return NotFound("Iten não encontrado com ID fornecido.");
-
-                _context.Cadastros.Remove(cadastroBanco);
-                _context.SaveChanges();
-
-                return NoContent();
+                if (exclusaoBemSucedida)
+                {
+                    return Ok("Usuário deletado com sucesso.");
+                }
+                else
+                {
+                    return NotFound("Usuário não encontrado com o ID fornecido.");
+                }
             }
             catch (System.Exception ex)
             {
@@ -139,3 +127,4 @@ namespace Api_SistemaCursosDistancia.Controllers
         }
     }
 }
+
