@@ -16,6 +16,12 @@ namespace Api_SistemaCursosDistancia.Repositories
             _context = context;
         }
 
+
+        public Cadastro Insert(int Id, Cadastro cadastro)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Delete(int Id)
         {
             throw new NotImplementedException();
@@ -31,10 +37,7 @@ namespace Api_SistemaCursosDistancia.Repositories
             throw new NotImplementedException();
         }
 
-        public Cadastro Insert(int Id, Cadastro cadastro)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public Cadastro Update(int ID, Cadastro cadastro)
         {

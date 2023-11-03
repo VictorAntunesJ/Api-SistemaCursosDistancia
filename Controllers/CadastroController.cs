@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Api_SistemaCursosDistancia.Context;
+using Api_SistemaCursosDistancia.Interfaces;
 using Api_SistemaCursosDistancia.Models;
+using Api_SistemaCursosDistancia.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api_SistemaCursosDistancia.Controllers
@@ -14,12 +16,11 @@ namespace Api_SistemaCursosDistancia.Controllers
     public class CadastroController : ControllerBase
     {
 
-        private readonly CursoDistanciaContext _context;
-
-        public CadastroController(CursoDistanciaContext context)
+        private readonly ICadastroRepository _cadastroRepository;
+        public CadastroController(ICadastroRepository cadastroRepository)
         {
-            _context = context;
-        }        
+            _cadastroRepository = cadastroRepository;
+        }
 
         /// <summary>
         /// Cadastrar usuário na aplicação
@@ -33,9 +34,9 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-               _context.Add(cadastro);
+                _context.Add(cadastro);
                 _context.SaveChanges();
-                return Ok (cadastro);
+                return Ok(cadastro);
 
             }
             catch (System.Exception ex)
@@ -74,7 +75,7 @@ namespace Api_SistemaCursosDistancia.Controllers
                     erro = ex.Message,
                 });
             }
-        } 
+        }
 
         /// <summary>
         /// Alterar dados da aula.
@@ -87,13 +88,13 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-               var cadastroBanco = _context.Cadastros.Find(id);
-               if(cadastroBanco == null)
+                var cadastroBanco = _context.Cadastros.Find(id);
+                if (cadastroBanco == null)
                     return NotFound("Item não encontrado com ID fornecido");
-                    
-                    cadastroBanco.Nome = cadastro.Nome;
-                    cadastroBanco.Email = cadastro.Email;
-                    cadastroBanco.Senha = cadastro.Senha;
+
+                cadastroBanco.Nome = cadastro.Nome;
+                cadastroBanco.Email = cadastro.Email;
+                cadastroBanco.Senha = cadastro.Senha;
 
                 _context.Cadastros.Update(cadastroBanco);
                 _context.SaveChanges();
@@ -135,7 +136,7 @@ namespace Api_SistemaCursosDistancia.Controllers
                 {
                     msg = "Falha na conexão",
                     erro = ex.Message,
-                });                
+                });
             }
         }
     }
