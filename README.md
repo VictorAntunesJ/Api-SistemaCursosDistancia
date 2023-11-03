@@ -221,6 +221,18 @@ Isso oferece flexibilidade e reutilização de código ao lidar com diferentes t
 
 ```
 
+## Registro de Serviços (Injeção de Dependência)
+
+```sh
+
+No ASP.NET Core, a injeção de dependência é uma técnica fundamental para gerenciar a resolução de dependências e fornecer objetos de serviço em toda a aplicação. Aqui está um exemplo de como você registra um serviço no contêiner de injeção de dependência no arquivo `Program.cs`:
+
+```csharp
+
+builder.Services.AddScoped<ICadastroRepository, CadastroRepository>();
+
+```
+
 
 
 

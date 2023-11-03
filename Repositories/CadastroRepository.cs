@@ -19,25 +19,25 @@ namespace Api_SistemaCursosDistancia.Repositories
 
         public Cadastro Insert(int Id, Cadastro cadastro)
         {
-            throw new NotImplementedException();
+            _context.Add(cadastro);
+            _context.SaveChanges();
+            return cadastro;
         }
 
-        public bool Delete(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<Cadastro> GetALL()
+         public ICollection<Cadastro> GetALL()
         {
             throw new NotImplementedException();
         }
 
         public Cadastro GetBuId(int Id)
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
-        
+        public bool Delete(int Id)
+        {
+            throw new NotImplementedException();
+        }
 
         public Cadastro Update(int ID, Cadastro cadastro)
         {

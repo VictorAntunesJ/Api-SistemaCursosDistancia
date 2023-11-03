@@ -1,5 +1,7 @@
 using System.Reflection;
 using Api_SistemaCursosDistancia.Context;
+using Api_SistemaCursosDistancia.Interfaces;
+using Api_SistemaCursosDistancia.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -12,6 +14,9 @@ builder.Services.AddDbContext<CursoDistanciaContext>(
           options.UseSqlServer(
               builder.Configuration.GetConnectionString("ConexaoPadrao")
           ));
+
+builder.Services.AddScoped<ICadastroRepository, CadastroRepository>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

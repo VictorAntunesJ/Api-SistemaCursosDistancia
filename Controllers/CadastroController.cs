@@ -34,10 +34,8 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                _context.Add(cadastro);
-                _context.SaveChanges();
+                _cadastroRepository.Insert(0, cadastro);
                 return Ok(cadastro);
-
             }
             catch (System.Exception ex)
             {
@@ -59,7 +57,7 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var cadastro = _context.Cadastros.ToList();
+                var cadastro = _cadastroRepository.GetALL().ToList();
                 if (cadastro == null || cadastro.Count == 0)
                 {
                     return NotFound("Nenhum usuário cadastrado.");
