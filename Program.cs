@@ -1,6 +1,7 @@
 using System.Reflection;
 using Api_SistemaCursosDistancia.Context;
 using Api_SistemaCursosDistancia.Interfaces;
+using Api_SistemaCursosDistancia.Models;
 using Api_SistemaCursosDistancia.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<CursoDistanciaContext>(
 builder.Services.AddScoped<ICadastroRepository, CadastroRepository>();
 builder.Services.AddScoped<IAulaRepository, AulaRepository>();
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
+builder.Services.AddScoped<IModuloRepository, ModuloRepository>();
 
 
 

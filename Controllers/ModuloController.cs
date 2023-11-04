@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Api_SistemaCursosDistancia.Context;
+using Api_SistemaCursosDistancia.Interfaces;
 using Api_SistemaCursosDistancia.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,10 +14,10 @@ namespace Api_SistemaCursosDistancia.Controllers
     [Route("[controller]")]
     public class ModuloController : ControllerBase
     {
-        private readonly CursoDistanciaContext _context;
-        public ModuloController(CursoDistanciaContext context)
+       private readonly IModuloRepository _moduloRepository;
+        public ModuloController(IModuloRepository moduloRepository)
         {
-            _context = context;
+            _moduloRepository = moduloRepository;
         }
 
         /// <summary>
@@ -31,8 +32,7 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                _context.Add(modulo);
-                _context.SaveChanges();
+                _moduloRepository.Insert(0, modulo);
                 return Ok(modulo);
 
             }
@@ -56,12 +56,7 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var modulo = _context.Modulos.ToList();
-                if (modulo == null || modulo.Count == 0)
-                {
-                    return NotFound("Nenhum usuário cadastrado.");
-                }
-
+               var modulo = _moduloRepository.GetALL().ToList();
                 return Ok(modulo);
             }
             catch (System.Exception ex)
@@ -91,17 +86,8 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var moduloBanco = _context.Modulos.Find(id);
-                if (moduloBanco == null)
-                    return NotFound("Item não encontrado com ID fornecido");
-
-                moduloBanco.titulo = modulo.titulo;
-                moduloBanco.aulas = modulo.aulas;
-
-                _context.Modulos.Update(moduloBanco);
-                _context.SaveChanges();
-
-                return Ok(moduloBanco);
+                var updateModulo = _moduloRepository.Update(id, modulo);
+                return Ok (updateModulo);
             }
             catch (System.Exception ex)
             {
@@ -122,19 +108,16 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var moduloBanco = _context.Modulos.Find(id);
-                if (moduloBanco == null)
+                bool exclusaoBemSucedida = _moduloRepository.Delete(id);
+
+                if (exclusaoBemSucedida)
                 {
-                    return NotFound("Item não encontrado com o ID fornecido.");
+                    return Ok("Usuário deletado com sucesso.");
                 }
-                foreach (var aula in moduloBanco.aulas)
+                else
                 {
-                    _context.Remove(aula);
+                    return NotFound("Usuário não encontrado com o ID fornecido.");
                 }
-                _context.Modulos.Remove(moduloBanco);
-                _context.SaveChanges();
-                return Ok("Item excluído com sucesso.");
-                //Não consegui eliminar o erro  
             }
             catch (System.Exception ex)
             {
