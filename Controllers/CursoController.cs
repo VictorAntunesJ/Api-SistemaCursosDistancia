@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Api_SistemaCursosDistancia.Context;
+using Api_SistemaCursosDistancia.Interfaces;
 using Api_SistemaCursosDistancia.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,10 +14,10 @@ namespace Api_SistemaCursosDistancia.Controllers
     [Route("[controller]")]
     public class CursoController : ControllerBase
     {
-        private readonly CursoDistanciaContext _context;
-        public CursoController(CursoDistanciaContext context)
+        private readonly ICursoRepository _cursoRepository;
+        public CursoController(ICursoRepository cursoRepository)
         {
-            _context = context;
+            _cursoRepository = cursoRepository;
         }
 
         /// <summary>
@@ -31,10 +32,8 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                _context.Add(curso);
-                _context.SaveChanges();
+                _cursoRepository.Insert(0, curso);
                 return Ok(curso);
-
             }
             catch (System.Exception ex)
             {
@@ -56,12 +55,7 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var curso = _context.Cursos.ToList();
-                if (curso == null || curso.Count == 0)
-                {
-                    return NotFound("Nenhum usuário cadastrado.");
-                }
-
+                var curso = _cursoRepository.GetALL().ToList();
                 return Ok(curso);
             }
             catch (System.Exception ex)
@@ -72,7 +66,7 @@ namespace Api_SistemaCursosDistancia.Controllers
                     erro = ex.Message,
                 });
             }
-        } 
+        }
 
 
 
@@ -91,20 +85,9 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-               var cursoBanco = _context.Cursos.Find(id);
-               if(cursoBanco == null)
-                    return NotFound("Item não encontrado com ID fornecido");
-                    
-                    cursoBanco.titulo = curso.titulo;
-                    cursoBanco.Descricao = curso.Descricao;
-                    cursoBanco.dataInicio = curso.dataInicio;
-                    cursoBanco.dataFim = curso.dataFim;
-                    cursoBanco.Instrutor = curso.Instrutor;
+                var updateCurso = _cursoRepository.Update(id, curso);
+                return Ok (updateCurso);
 
-                _context.Cursos.Update(cursoBanco);
-                _context.SaveChanges();
-
-                return Ok(cursoBanco);
             }
             catch (System.Exception ex)
             {
@@ -125,15 +108,16 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                var cursoBanco = _context.Cursos.Find(id);
+                bool exclusaoBemSucedida = _cursoRepository.Delete(id);
 
-                if (cursoBanco == null)
-                    return NotFound("Iten não encontrado com ID fornecido.");
-
-                _context.Cursos.Remove(cursoBanco);
-                _context.SaveChanges();
-
-                return NoContent();
+                if (exclusaoBemSucedida)
+                {
+                    return Ok("Usuário deletado com sucesso.");
+                }
+                else
+                {
+                    return NotFound("Usuário não encontrado com o ID fornecido.");
+                }
             }
             catch (System.Exception ex)
             {
@@ -141,7 +125,7 @@ namespace Api_SistemaCursosDistancia.Controllers
                 {
                     msg = "Falha na conexão",
                     erro = ex.Message,
-                });                
+                });
             }
         }
     }

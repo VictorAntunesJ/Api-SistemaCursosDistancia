@@ -17,6 +17,8 @@ builder.Services.AddDbContext<CursoDistanciaContext>(
 
 builder.Services.AddScoped<ICadastroRepository, CadastroRepository>();
 builder.Services.AddScoped<IAulaRepository, AulaRepository>();
+builder.Services.AddScoped<ICursoRepository, CursoRepository>();
+
 
 
 builder.Services.AddControllers();

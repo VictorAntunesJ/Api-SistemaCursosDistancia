@@ -50,11 +50,6 @@ namespace Api_SistemaCursosDistancia.Repositories
                 return aulaBanco;
         }
 
-
-
-
-
-
         public bool Delete(int Id)
         {
             var aulaBanco = _context.Aulas.Find(Id);
@@ -68,15 +63,9 @@ namespace Api_SistemaCursosDistancia.Repositories
                 return true;
         }
 
-
-
-        public Aula GetBuId(int Id)
+        public Aula GetBuId(int id)
         {
-            throw new NotImplementedException();
+            return _context.Aulas.Find(id);
         }
-
-       
-
-        
     }
 }
