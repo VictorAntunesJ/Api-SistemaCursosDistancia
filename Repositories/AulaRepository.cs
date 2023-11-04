@@ -24,6 +24,32 @@ namespace Api_SistemaCursosDistancia.Repositories
             return aula;
         }
 
+         public ICollection<Aula> GetALL()
+        {
+            var aula  = _context.Aulas.ToList();
+            if(aula == null || aula.Count == 0)
+            {
+                return new List<Aula>{new Aula {titulo = " Nenhum usúario cadastrado. "}};
+            }
+            return aula;
+        }
+
+        public Aula Update(int Id, Aula aula)
+        {
+           var aulaBanco = _context.Aulas.Find(Id);
+               if(aulaBanco == null)
+                    throw new Exception("Item não encontrado com o ID fornecido.");
+                    
+                    aulaBanco.titulo = aula.titulo;
+                    aulaBanco.conteudo = aula.conteudo;
+                    aulaBanco.arquivo = aula.arquivo;
+
+                _context.Aulas.Update(aulaBanco);
+                _context.SaveChanges();
+
+                return aulaBanco;
+        }
+
 
 
 
@@ -31,13 +57,18 @@ namespace Api_SistemaCursosDistancia.Repositories
 
         public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            var aulaBanco = _context.Aulas.Find(Id);
+
+                if ( aulaBanco == null )
+                    throw new Exception("Item não encontrado com o ID fornecido.");
+
+                _context.Aulas.Remove(aulaBanco);
+                _context.SaveChanges();
+
+                return true;
         }
 
-        public ICollection<Aula> GetALL()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Aula GetBuId(int Id)
         {
@@ -46,9 +77,6 @@ namespace Api_SistemaCursosDistancia.Repositories
 
        
 
-        public Aula Update(int ID, Aula aula)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
