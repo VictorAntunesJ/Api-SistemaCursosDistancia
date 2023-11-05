@@ -23,8 +23,8 @@ namespace Api_SistemaCursosDistancia.Models
 
         
 
-        // [ForeignKey("ModuloId")]
-        // public int ModuloId { get; set; }
-        // public Modulo Modulo { get; set; }
+        [ForeignKey("ModuloId")]
+        public int ModuloId { get; set; }
+        public Modulo Modulo { get; set; }
     }
 }

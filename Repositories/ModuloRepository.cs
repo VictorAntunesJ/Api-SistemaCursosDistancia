@@ -10,7 +10,7 @@ namespace Api_SistemaCursosDistancia.Repositories
 {
     public class ModuloRepository : IModuloRepository
     {
-         private readonly CursoDistanciaContext _context;
+        private readonly CursoDistanciaContext _context;
         public ModuloRepository(CursoDistanciaContext context)
         {
             _context = context;
@@ -49,12 +49,18 @@ namespace Api_SistemaCursosDistancia.Repositories
                 return moduloBanco;
         }
 
-        public bool Delete(int Id)
+        public bool Delete(int id)
         {
-            var moduloBanco = _context.Modulos.Find(Id);
+            var moduloBanco = _context.Modulos.Find(id);
 
                 if ( moduloBanco == null )
                     throw new Exception("Item não encontrado com o ID fornecido.");
+
+                var aulasRelacionadas = _context.Aulas.Where(a => a.ModuloId == id).ToList();
+                if (aulasRelacionadas.Any())
+                {
+                    _context.Aulas.RemoveRange(aulasRelacionadas);
+                }   
 
                 _context.Modulos.Remove(moduloBanco);
                 _context.SaveChanges();

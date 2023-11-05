@@ -108,7 +108,7 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-                bool exclusaoBemSucedida = _moduloRepository.Delete(id);
+               bool exclusaoBemSucedida = _moduloRepository.Delete(id);
 
                 if (exclusaoBemSucedida)
                 {
@@ -118,14 +118,13 @@ namespace Api_SistemaCursosDistancia.Controllers
                 {
                     return NotFound("Usuário não encontrado com o ID fornecido.");
                 }
+
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return StatusCode(500, new
-                {
-                    msg = "Falha na conexão",
-                    erro = ex.Message,
-                });
+                // Registre a exceção interna para obter detalhes adicionais.
+                Console.WriteLine($"Erro ao excluir o módulo: {ex.InnerException?.Message}");
+                throw;
             }
         }
     }
