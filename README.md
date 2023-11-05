@@ -1,4 +1,9 @@
-# Diagrama de Classes  - CD
+# Sistema de Cursos a Distância
+
+Este é o README para o projeto "Sistema de Cursos a Distância". Este projeto é uma API desenvolvida para gerenciar cursos a distância, com cadastros de usuários, cursos, módulos e aulas.
+
+
+## Diagrama de Classes  - CD
 
 ```mermaid
 classDiagram
@@ -38,26 +43,45 @@ Curso "" -- "" Modulo
 Modulo "" -- "" Aula 
 
 ```
+
+O diagrama de classes acima representa a estrutura das principais entidades do sistema, incluindo `Cadastro`, `Curso`, `Modulo` e `Aula`.
+
+### Começando
+
+### Configuração do Ambiente de Desenvolvimento
+
+- Crie um novo projeto:
+
 ```sh
- - Comoda novo projeto
+     dotnet new webapi --name Api/SistemaCursosDistancia
+     add file readme.md
+     add file .gitignore
+```
 
-    dotnet new webapi --name Api/SistemaCursosDistancia
-    add file readme.md
-    add file .gitignore
-     
-    dotnet tool install --global dotnet-ef
-    dotnet tool update --global dotnet-ef
+ - Instale a ferramenta dotnet-ef:
 
-    dotnet add package Microsoft.EntityFrameworkCore
-    dotnet add package Microsoft.EntityFrameworkCore.Design
-    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+```sh
+     dotnet tool install --global dotnet-ef
+     dotnet tool update --global dotnet-ef
+```
 
- - Pacote de instalacao Microsoft.Data.SqlClient do SQL Server e ADO.NET
+ - Adicione os pacotes do Entity Framework Core:
+  
+```sh
+     dotnet add package Microsoft.EntityFrameworkCore
+     dotnet add package Microsoft.EntityFrameworkCore.Design
+     dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+```
 
+ - Instale o pacote Microsoft.Data.SqlClient do SQL Server e ADO.NET:
+
+```sh
     dotnet add package Microsoft.Data.SqlClient --version 5.2.0-preview3.23201.1
 ```
 
+## Modelos
 
+Crie modelos no diretório do projeto. Crie as classes Cadastro, Curso, Modulo e Aula com os seguintes atributos:
 
 ```sh
 add file Models no diretorio do projeto.
@@ -69,12 +93,12 @@ class Cadastro
               public string Nome { get; set; }
               public string email { get; set; }
               public string senha { get; set; }
-              public List<CursoCD> CursoCDs { get; set; }    
+              public List<Curso> Cursos { get; set; }    
           }
 
 add class curso dentro da Models com os seguintes atributos:
 
-          class CursoCD
+          class Curso
           {
               public int Id { get; set; }
               public string Titulo { get; set; }
@@ -82,22 +106,21 @@ add class curso dentro da Models com os seguintes atributos:
               public DateTime DataInicio { get; set; }
               public DateTime DataFim { get; set; }
               public string Instrutor { get; set; }
-              public List<ModuloCD> ModuloCDs { get; set; }
+              public List<Modulo> Modulos { get; set; }
           }
-
 
 add class Modulo dentro da Models com os seguintes atributos:
 
-          class ModuloCD
+          class Modulo
           {
               public int Id { get; set; }
               public string Titulo { get; set; }
-              public List<AulaCD> AulaCDs { get; set; }
+              public List<Aula> Aulas { get; set; }
           }
 
 add class Modulo dentro da Models com os seguintes atributos:
 
-          public class AulaCD
+          public class Aula
           {
               public int Id { get; set; }
               public string Titulo { get; set; }
@@ -107,7 +130,10 @@ add class Modulo dentro da Models com os seguintes atributos:
 
 ```
 
-## Context
+## Banco de Dados (DbContext)
+
+Crie um contexto para o banco de dados, mapeando as entidades para tabelas e estabelecendo a conexão com o banco de dados:
+
 ```sh
       add file Context no diretorio do projeto.
       add class CursoDistanciaContext dentro da Context para mapear as entidades do aplicativo para as tabelas do banco de dados e estabelecer a conexão com o banco de dados.
@@ -120,10 +146,10 @@ add class Modulo dentro da Models com os seguintes atributos:
 
             }
 
-            public DbSet<CadastroCD> CadastroCDs {get; set;}
-            public DbSet<AulaCD> AulaCDs {get; set;}
-            public DbSet<CursoCD> CursoCDs {get; set;}
-            public DbSet<ModuloCD> ModuloCDs {get; set;}
+            public DbSet<Cadastro> Cadastros {get; set;}
+            public DbSet<Aula> Aulas {get; set;}
+            public DbSet<Curso> Cursos {get; set;}
+            public DbSet<Modulo> Modulos {get; set;}
 
 
   - Entidades Mapeadas
@@ -132,20 +158,21 @@ add class Modulo dentro da Models com os seguintes atributos:
       - `Aulas`: Representa informações sobre as aulas dos cursos, incluindo títulos, conteúdo e arquivos associados.
       - `Cursos`: Representa informações sobre os cursos oferecidos, incluindo títulos, descrições, datas de início e término e   instrutores.
       - `Modulos`: Representa os módulos de um curso, que contêm aulas relacionadas.
+
 ```
 
 ## ConnectionStrings
-```sh
 
+Defina as strings de conexão no arquivo de configuração:
+
+```sh
 ,
   "ConnectionStrings": {
     "ConexaoPadrao":"Server=localhost\\SqlExpress; Initial Catalog=ApiCursoAdistancia;Integrated Security=True; TrustServerCertificate=True"
   }
-
 ```
 
 ## Configuração do DbContext
-
 ```sh
   Nesta parte do código, estamos configurando o contexto do banco de dados para a aplicação. O contexto do banco 
   de dados é uma parte essencial de aplicativos que interagem com bancos de dados SQL. Neste caso, estamos usando 
@@ -156,9 +183,12 @@ add class Modulo dentro da Models com os seguintes atributos:
           options.UseSqlServer(
               builder.Configuration.GetConnectionString("ConexaoPadrao")
           ));
-
 ```
+
 ## Migrations
+
+Execute as migrações para criar o banco de dados:
+
 ```sh
 
 dotnet-ef migrations add ApiCursoDistancia
@@ -199,8 +229,6 @@ Aqui você pode fornecer instruções sobre como usar a API. Isso pode incluir e
 
 ## IRepository - Interface de Repositório Genérica 
 
-```sh
-
 A `IRepository` é uma interface genérica que define métodos comuns para realizar operações CRUD (Create, Read, Update, Delete) em objetos de diversas classes, incluindo `Cadastro`, `Aula`, `Curso` e `Módulo`, no contexto de um sistema de cursos a distância.
 
 ### Métodos Comuns
@@ -219,12 +247,11 @@ A interface genérica `IRepository` pode ser implementada para realizar operaç�
 
 Isso oferece flexibilidade e reutilização de código ao lidar com diferentes tipos de entidades no sistema de cursos a distância.
 
-```
+
 
 ## Registro de Serviços (Injeção de Dependência)
 
 ```sh
-
 No ASP.NET Core, a injeção de dependência é uma técnica fundamental para gerenciar a resolução de dependências e fornecer objetos de serviço em toda a aplicação. Aqui está um exemplo de como você registra um serviço no contêiner de injeção de dependência no arquivo `Program.cs`:
 
 ```csharp
@@ -233,23 +260,18 @@ builder.Services.AddScoped<ICadastroRepository, CadastroRepository>();
 
 ```
 
+## Referências
 
-
-
-## Referencia
-```sh
-    https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
-    https://learn.microsoft.com/pt-br/sql/connect/ado-net/sql/?view=sql-server-ver16
-    https://www.nuget.org/
-```    
+   Documentação do ADO.NET
+   Documentação do SQL Server e ADO.NET
+   Pacotes NuGet
 
 ## Contribuições
 
 Você é bem-vindo para contribuir para este projeto. Sinta-se à vontade para abrir problemas (issues) ou enviar solicitações de pull (pull requests) para melhorar esta API.
 
+```sh
+
+    Esta versão do README está organizada em seções claras, utiliza formatação Markdown para destacar código e links, e fornece informações detal
+
 ```
-
-
-
-
-

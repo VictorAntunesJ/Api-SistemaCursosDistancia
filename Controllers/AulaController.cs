@@ -121,5 +121,9 @@ namespace Api_SistemaCursosDistancia.Controllers
                 });
             }
         }
+
+        //Singleton
+        //Opload de Imagens
+        
     }
 }
