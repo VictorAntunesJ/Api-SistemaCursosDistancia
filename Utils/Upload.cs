@@ -12,6 +12,18 @@ namespace Api-SistemaCursosDistancia.Utils
         // Remover arquivo.
 
         // Validar extensões de arquivo.
+        public static bool ValidarExtensao(string[] extensoesPermitidas, string nomeArquivo)
+        {
+            string extensao = RetornarExtensao(nomeArquivo);
+            foreach (string ext in extensoesPermitidas)
+            {
+                if(ext == extensao )
+                {
+                    return true
+                }
+            }
+            return false;  
+        }
    
         // Retornar extençõe.
         public static string RetornarExtensao(string nomeArquivo)
