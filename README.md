@@ -135,29 +135,29 @@ add class Modulo dentro da Models com os seguintes atributos:
 Crie um contexto para o banco de dados, mapeando as entidades para tabelas e estabelecendo a conexão com o banco de dados:
 
 ```sh
-      add file Context no diretorio do projeto.
-      add class CursoDistanciaContext dentro da Context para mapear as entidades do aplicativo para as tabelas do banco de dados e estabelecer a conexão com o banco de dados.
+  add file Context no diretorio do projeto.
+  add class CursoDistanciaContext dentro da Context para mapear as entidades do aplicativo para as tabelas do banco de dados e estabelecer a conexão com o banco de dados.
 
-   - `Construtor`
-     O construtor do contexto é responsável por configurar a conexão com o banco de dados usando as opções fornecidas durante a injeção de dependência.
+  - `Construtor`
+    O construtor do contexto é responsável por configurar a conexão com o banco de dados usando as opções fornecidas durante a injeção de dependência.
  
-            public CursoDistanciaContext(DbContextOptions<CursoDistanciaContext> options) :base(options)
-            {
+      public CursoDistanciaContext(DbContextOptions<CursoDistanciaContext> options) :base(options)
+      {
 
-            }
+      }
 
-            public DbSet<Cadastro> Cadastros {get; set;}
-            public DbSet<Aula> Aulas {get; set;}
-            public DbSet<Curso> Cursos {get; set;}
-            public DbSet<Modulo> Modulos {get; set;}
+      public DbSet<Cadastro> Cadastros {get; set;}
+      public DbSet<Aula> Aulas {get; set;}
+      public DbSet<Curso> Cursos {get; set;}
+      public DbSet<Modulo> Modulos {get; set;}
 
 
   - Entidades Mapeadas
 
-      - `Cadastros`: Representa os registros de usuários cadastrados no sistema.
-      - `Aulas`: Representa informações sobre as aulas dos cursos, incluindo títulos, conteúdo e arquivos associados.
-      - `Cursos`: Representa informações sobre os cursos oferecidos, incluindo títulos, descrições, datas de início e término e   instrutores.
-      - `Modulos`: Representa os módulos de um curso, que contêm aulas relacionadas.
+    - `Cadastros`: Representa os registros de usuários cadastrados no sistema.
+    - `Aulas`: Representa informações sobre as aulas dos cursos, incluindo títulos, conteúdo e arquivos associados.
+    - `Cursos`: Representa informações sobre os cursos oferecidos, incluindo títulos, descrições, datas de início e término e   instrutores.
+    - `Modulos`: Representa os módulos de um curso, que contêm aulas relacionadas.
 
 ```
 
@@ -190,16 +190,13 @@ Defina as strings de conexão no arquivo de configuração:
 Execute as migrações para criar o banco de dados:
 
 ```sh
-
 dotnet-ef migrations add ApiCursoDistancia
 dotnet-ef database update
-
 ```
 
 ## Documentacao da API
 ```sh
-Configuração do Swagger
-
+Configuração do Swagger.
 A configuração do Swagger foi feita da seguinte forma:
 
 - `Título:` Sistema de Cursos a Distância API
@@ -221,10 +218,9 @@ A API fornece os seguintes endpoints:
 
 Você pode encontrar mais informações sobre cada endpoint, incluindo detalhes dos parâmetros, na documentação interativa do Swagger.
 
-Como Usar
+- Como Usar
 
 Aqui você pode fornecer instruções sobre como usar a API. Isso pode incluir exemplos de solicitações, respostas e autenticação, dependendo da complexidade da sua API.
-
 ```
 
 ## IRepository - Interface de Repositório Genérica 
@@ -254,24 +250,19 @@ Isso oferece flexibilidade e reutilização de código ao lidar com diferentes t
 ```sh
 No ASP.NET Core, a injeção de dependência é uma técnica fundamental para gerenciar a resolução de dependências e fornecer objetos de serviço em toda a aplicação. Aqui está um exemplo de como você registra um serviço no contêiner de injeção de dependência no arquivo `Program.cs`:
 
-```csharp
-
 builder.Services.AddScoped<ICadastroRepository, CadastroRepository>();
-
 ```
 
 ## Referências
 
-   Documentação do ADO.NET
-   Documentação do SQL Server e ADO.NET
-   Pacotes NuGet
+    https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
+    https://learn.microsoft.com/pt-br/sql/connect/ado-net/sql/?view=sql-server-ver16
+    https://www.nuget.org/
 
 ## Contribuições
 
 Você é bem-vindo para contribuir para este projeto. Sinta-se à vontade para abrir problemas (issues) ou enviar solicitações de pull (pull requests) para melhorar esta API.
 
 ```sh
-
     Esta versão do README está organizada em seções claras, utiliza formatação Markdown para destacar código e links, e fornece informações detal
-
 ```
