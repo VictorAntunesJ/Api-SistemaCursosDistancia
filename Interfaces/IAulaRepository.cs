@@ -11,12 +11,12 @@ namespace Api_SistemaCursosDistancia.Interfaces
         //CRUD
         //Read
         ICollection<Aula> GetALL();
-        Aula GetBuId(int Id);
+        Aula GetById(int id);
         // Create
-        Aula Insert(int Id, Aula aula);
+        Aula Insert(int id, Aula aula);
         //Update
-        Aula Update (int ID, Aula aula);
+        Aula Update (int id, Aula aula);
         //Delete
-        bool Delete (int Id);
+        bool Delete (int id);
     }
 }

@@ -1,9 +1,12 @@
+using System.Net.NetworkInformation;
 using System.Reflection;
 using Api_SistemaCursosDistancia.Context;
 using Api_SistemaCursosDistancia.Interfaces;
 using Api_SistemaCursosDistancia.Models;
 using Api_SistemaCursosDistancia.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,10 +47,9 @@ builder.Services.AddSwaggerGen(c=>
             Url = new Uri("https://meusite.com")
         }
     });
-    // Adicionar configurações extras da documentação, para ler o XMls.
+//Add Configuracoes extras da documentaçao, para ler os XMLs
     var xmlArquivo = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlArquivo));
-
 });
 
 var app = builder.Build();
@@ -63,6 +65,16 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+            Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")
+    ),
+    RequestPath = "/Files"
+});
+
 app.MapControllers();
 
 app.Run();
+

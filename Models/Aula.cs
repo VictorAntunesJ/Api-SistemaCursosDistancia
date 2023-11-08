@@ -9,7 +9,7 @@ namespace Api_SistemaCursosDistancia.Models
 {
     public class Aula
     {
-       [Key]
+        [Key]
         public int id { get; set; }
         
         [Required]

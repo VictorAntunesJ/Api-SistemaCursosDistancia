@@ -17,7 +17,7 @@ namespace Api_SistemaCursosDistancia.Repositories
         }
 
 
-         public Curso Insert(int Id, Curso curso)
+         public Curso Insert(int id, Curso curso)
         {
             _context.Add(curso);
             _context.SaveChanges();
@@ -34,9 +34,9 @@ namespace Api_SistemaCursosDistancia.Repositories
             return curso;
         }
 
-        public Curso Update(int Id, Curso curso)
+        public Curso Update(int id, Curso curso)
         {
-           var cursoBanco = _context.Cursos.Find(Id);
+           var cursoBanco = _context.Cursos.Find(id);
                if(cursoBanco == null)
                     throw new Exception("Item não encontrado com o ID fornecido.");
                     
@@ -52,9 +52,9 @@ namespace Api_SistemaCursosDistancia.Repositories
                 return cursoBanco;
         }
 
-        public bool Delete(int Id)
+        public bool Delete(int id)
         {
-            var aulaBanco = _context.Aulas.Find(Id);
+            var aulaBanco = _context.Aulas.Find(id);
 
                 if ( aulaBanco == null )
                     throw new Exception("Item não encontrado com o ID fornecido.");
@@ -65,9 +65,10 @@ namespace Api_SistemaCursosDistancia.Repositories
                 return true;
         }
 
-        public Curso GetBuId(int id)
+
+        public Curso GetById(int id)
         {
-            return _context.Cursos.Find(id);
+             return _context.Cursos.Find(id);
         }
     }
 }

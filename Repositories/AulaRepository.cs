@@ -16,56 +16,75 @@ namespace Api_SistemaCursosDistancia.Repositories
             _context = context;
         }
 
-
-         public Aula Insert(int Id, Aula aula)
+        public Aula Insert(int id, Aula aula)
         {
             _context.Add(aula);
             _context.SaveChanges();
             return aula;
         }
 
-         public ICollection<Aula> GetALL()
+        public ICollection<Aula> GetALL()
         {
-            var aula  = _context.Aulas.ToList();
-            if(aula == null || aula.Count == 0)
+            var aula = _context.Aulas.ToList();
+            if (aula == null || aula.Count == 0)
             {
-                return new List<Aula>{new Aula {titulo = " Nenhum usúario cadastrado. "}};
+                return new List<Aula> { new Aula { titulo = " Nenhum usúario cadastrado. " } };
             }
             return aula;
         }
 
-        public Aula Update(int Id, Aula aula)
+        public Aula Update(int id, Aula aula)
         {
-           var aulaBanco = _context.Aulas.Find(Id);
-               if(aulaBanco == null)
-                    throw new Exception("Item não encontrado com o ID fornecido.");
-                    
-                    aulaBanco.titulo = aula.titulo;
-                    aulaBanco.conteudo = aula.conteudo;
-                    aulaBanco.arquivo = aula.arquivo;
+            var aulaBanco = _context.Aulas.Find(id);
+            if (aulaBanco == null)
+                throw new Exception("Item não encontrado com o ID fornecido.");
 
-                _context.Aulas.Update(aulaBanco);
-                _context.SaveChanges();
+            aulaBanco.titulo = aula.titulo;
+            aulaBanco.conteudo = aula.conteudo;
+            aulaBanco.arquivo = aula.arquivo;
 
-                return aulaBanco;
+            _context.Aulas.Update(aulaBanco);
+            _context.SaveChanges();
+
+            return aulaBanco;
+        }
+        public bool Delete(int id)
+        {
+            var aulaBanco = _context.Aulas.Find(id);
+
+            if (aulaBanco == null)
+                throw new Exception("Item não encontrado com o ID fornecido.");
+
+            _context.Aulas.Remove(aulaBanco);
+            _context.SaveChanges();
+
+            return true;
         }
 
-        public bool Delete(int Id)
-        {
-            var aulaBanco = _context.Aulas.Find(Id);
-
-                if ( aulaBanco == null )
-                    throw new Exception("Item não encontrado com o ID fornecido.");
-
-                _context.Aulas.Remove(aulaBanco);
-                _context.SaveChanges();
-
-                return true;
-        }
-
-        public Aula GetBuId(int id)
+        public Aula GetById(int id)
         {
             return _context.Aulas.Find(id);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

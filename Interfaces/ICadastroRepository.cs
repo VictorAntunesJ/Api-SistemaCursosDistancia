@@ -11,12 +11,12 @@ namespace Api_SistemaCursosDistancia.Interfaces
         //CRUD
         //Read
         ICollection<Cadastro> GetALL();
-        Cadastro GetBuId(int Id);
+        Cadastro GetById(int id);
         // Create
-        Cadastro Insert(int Id, Cadastro cadastro);
+        Cadastro Insert(int id, Cadastro cadastro);
         //Update
-        Cadastro Update (int ID, Cadastro cadastro);
+        Cadastro Update (int id, Cadastro cadastro);
         //Delete
-        bool Delete (int Id);
+        bool Delete (int id);
     }
 }

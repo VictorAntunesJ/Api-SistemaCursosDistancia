@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Api_SistemaCursosDistancia.Context;
 using Api_SistemaCursosDistancia.Interfaces;
 using Api_SistemaCursosDistancia.Models;
+using Api_SistemaCursosDistancia.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api_SistemaCursosDistancia.Controllers
@@ -14,24 +15,38 @@ namespace Api_SistemaCursosDistancia.Controllers
     public class AulaController : ControllerBase
     {
 
-         private readonly IAulaRepository _aulaRepository;
+        private readonly IAulaRepository _aulaRepository;
         public AulaController(IAulaRepository aulaRepository)
         {
             _aulaRepository = aulaRepository;
         }
 
 
-        /// <summary>
-        /// Cadastrar aula na aplicação.
+         /// <summary>
+        /// Cadastrar aula na aplicação
         /// </summary>
-        /// <param name="aula">Dados do usuário.</param>
-        /// <returns>Dados do usuário cadastrado</returns>
-
+        /// <param name="aula">Dados da aula</param>
+        /// /// <param name="escolhaArquivo">Todas informações de um aula</param>
+        /// <returns>Dados da aula cadastrado</returns>
         [HttpPost]
-        public IActionResult Create(Aula aula)
+        public IActionResult Create([FromForm] Aula aula, IFormFile escolhaArquivo)
         {
             try
             {
+                #region Upload de Imagem
+                string[] extensoesPermitidas = { "jpeg", "jpg", "png", "svg" };
+                string uploadResultado = Upload.UploadFile(escolhaArquivo, extensoesPermitidas, "Images");
+
+                if (uploadResultado == "")
+                {
+                    return BadRequest("Arquivo não encontrado ou extenção não permitida");
+                }
+
+                aula.arquivo = uploadResultado;
+
+                #endregion
+
+                // Use o repositório para inserir o usuário
                 _aulaRepository.Insert(0, aula);
                 return Ok(aula);
             }
@@ -39,7 +54,7 @@ namespace Api_SistemaCursosDistancia.Controllers
             {
                 return StatusCode(500, new
                 {
-                    msg = "Falha na conexão",
+                    msg = "Falha na Conexão!",
                     erro = ex.Message,
                 });
             }
@@ -54,7 +69,7 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-               var aula = _aulaRepository.GetALL().ToList();
+                var aula = _aulaRepository.GetALL().ToList();
                 return Ok(aula);
             }
             catch (System.Exception ex)
@@ -78,7 +93,9 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
-              var updateCadastro = _aulaRepository.Update(id, aula);
+
+
+                var updateCadastro = _aulaRepository.Update(id, aula);
                 return Ok(updateCadastro);
             }
             catch (System.Exception ex)
@@ -121,9 +138,5 @@ namespace Api_SistemaCursosDistancia.Controllers
                 });
             }
         }
-
-        //Singleton
-        //Opload de Imagens
-        
     }
 }

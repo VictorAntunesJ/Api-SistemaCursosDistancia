@@ -11,7 +11,7 @@ namespace Api_SistemaCursosDistancia.Interfaces
         //CRUD
         //Read
         ICollection<Curso> GetALL();
-        Curso GetBuId(int Id);
+        Curso GetById(int Id);
         // Create
         Curso Insert(int Id, Curso curso);
         //Update

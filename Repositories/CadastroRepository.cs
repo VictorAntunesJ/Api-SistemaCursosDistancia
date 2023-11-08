@@ -17,59 +17,57 @@ namespace Api_SistemaCursosDistancia.Repositories
         }
 
 
-        public Cadastro Insert(int Id, Cadastro cadastro)
+        public Cadastro Insert(int id, Cadastro cadastro)
         {
             _context.Add(cadastro);
             _context.SaveChanges();
             return cadastro;
         }
 
-         public ICollection<Cadastro> GetALL()
+        public ICollection<Cadastro> GetALL()
         {
-            var cadastro  = _context.Cadastros.ToList();
-            if(cadastro == null || cadastro.Count == 0)
+            var cadastro = _context.Cadastros.ToList();
+            if (cadastro == null || cadastro.Count == 0)
             {
-                return new List<Cadastro>{new Cadastro {Nome = " Nenhum usuário encontrado. "}};
+                return new List<Cadastro> { new Cadastro { Nome = " Nenhum usuário encontrado. " } };
             }
             return cadastro;
         }
 
 
-          public Cadastro Update(int Id, Cadastro cadastro)
+        public Cadastro Update(int id, Cadastro cadastro)
         {
-           var cadastroBanco = _context.Cadastros.Find(Id);
-                if (cadastroBanco == null)
-                     throw new Exception("Item não encontrado com o ID fornecido.");
+            var cadastroBanco = _context.Cadastros.Find(id);
+            if (cadastroBanco == null)
+                throw new Exception("Item não encontrado com o ID fornecido.");
 
-                cadastroBanco.Nome = cadastro.Nome;
-                cadastroBanco.Email = cadastro.Email;
-                cadastroBanco.Senha = cadastro.Senha;
+            cadastroBanco.Nome = cadastro.Nome;
+            cadastroBanco.Email = cadastro.Email;
+            cadastroBanco.Senha = cadastro.Senha;
 
-                _context.Cadastros.Update(cadastroBanco);
-                _context.SaveChanges();
+            _context.Cadastros.Update(cadastroBanco);
+            _context.SaveChanges();
 
-                return cadastroBanco;
+            return cadastroBanco;
         }
 
 
-        public Cadastro GetBuId(int id)
+         public bool Delete(int id)
         {
-           return _context.Cadastros.Find(id);
+            var cadastroBanco = _context.Cadastros.Find(id);
+
+            if (cadastroBanco == null)
+                throw new Exception("Item não encontrado com o ID fornecido.");
+
+            _context.Cadastros.Remove(cadastroBanco);
+            _context.SaveChanges();
+
+            return true;
         }
 
-        public bool Delete(int Id)
-        {  
-            var cadastroBanco = _context.Cadastros.Find(Id);
-
-                if (cadastroBanco == null)
-                    throw new Exception("Item não encontrado com o ID fornecido.");
-
-                _context.Cadastros.Remove(cadastroBanco);
-                _context.SaveChanges();
-
-                return true;
+        public Cadastro GetById(int id)
+        {
+            return _context.Cadastros.Find(id);
         }
-
-       
     }
 }
