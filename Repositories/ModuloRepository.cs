@@ -15,15 +15,12 @@ namespace Api_SistemaCursosDistancia.Repositories
         {
             _context = context;
         }
-
-
-         public Modulo Insert(int id, Modulo modulo)
+        public Modulo Insert(int id, Modulo modulo)
         {
             _context.Add(modulo);
             _context.SaveChanges();
             return modulo;
         }
-
          public ICollection<Modulo> GetALL()
         {
             var modulo  = _context.Modulos.ToList();
@@ -33,7 +30,6 @@ namespace Api_SistemaCursosDistancia.Repositories
             }
             return modulo;
         }
-
         public Modulo Update(int id, Modulo modulo)
         {
            var moduloBanco = _context.Modulos.Find(id);
@@ -48,7 +44,6 @@ namespace Api_SistemaCursosDistancia.Repositories
 
                 return moduloBanco;
         }
-
         public bool Delete(int id)
         {
             var moduloBanco = _context.Modulos.Find(id);

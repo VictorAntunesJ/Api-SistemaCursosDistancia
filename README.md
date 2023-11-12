@@ -71,6 +71,7 @@ O diagrama de classes acima representa a estrutura das principais entidades do s
      dotnet add package Microsoft.EntityFrameworkCore
      dotnet add package Microsoft.EntityFrameworkCore.Design
      dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+     dotnet add package Microsoft.EntityFrameworkCore.Tools
 ```
 
  - Instale o pacote Microsoft.Data.SqlClient do SQL Server e ADO.NET:
@@ -258,6 +259,7 @@ builder.Services.AddScoped<ICadastroRepository, CadastroRepository>();
     https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
     https://learn.microsoft.com/pt-br/sql/connect/ado-net/sql/?view=sql-server-ver16
     https://www.nuget.org/
+    https://learn.microsoft.com/pt-br/ef/
 
 ## Contribuições
 

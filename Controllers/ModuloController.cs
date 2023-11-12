@@ -25,8 +25,6 @@ namespace Api_SistemaCursosDistancia.Controllers
         /// </summary>
         /// <param name="modulo">Dados do usuário</param>
         /// <returns>Dados do modulos cadastrados</returns>
-
-
         [HttpPost]
         public IActionResult Create(Modulo modulo)
         {
@@ -69,12 +67,6 @@ namespace Api_SistemaCursosDistancia.Controllers
             }
         }
 
-
-
-
-
-
-
         /// <summary>
         /// Alterar dados do modulo.
         /// </summary>
@@ -98,6 +90,7 @@ namespace Api_SistemaCursosDistancia.Controllers
                 });
             }
         }
+        
         /// <summary>
         /// Excluir um modulo da aplicação.
         /// </summary>

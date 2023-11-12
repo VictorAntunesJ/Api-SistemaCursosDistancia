@@ -16,7 +16,6 @@ namespace Api_SistemaCursosDistancia.Repositories
             _context = context;
         }
 
-
         public Cadastro Insert(int id, Cadastro cadastro)
         {
             _context.Add(cadastro);
@@ -34,7 +33,6 @@ namespace Api_SistemaCursosDistancia.Repositories
             return cadastro;
         }
 
-
         public Cadastro Update(int id, Cadastro cadastro)
         {
             var cadastroBanco = _context.Cadastros.Find(id);
@@ -51,7 +49,6 @@ namespace Api_SistemaCursosDistancia.Repositories
             return cadastroBanco;
         }
 
-
          public bool Delete(int id)
         {
             var cadastroBanco = _context.Cadastros.Find(id);
@@ -64,7 +61,6 @@ namespace Api_SistemaCursosDistancia.Repositories
 
             return true;
         }
-
         public Cadastro GetById(int id)
         {
             return _context.Cadastros.Find(id);
