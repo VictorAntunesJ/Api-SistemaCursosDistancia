@@ -268,3 +268,8 @@ Você é bem-vindo para contribuir para este projeto. Sinta-se à vontade para a
 ```sh
     Esta versão do README está organizada em seções claras, utiliza formatação Markdown para destacar código e links, e fornece informações detal
 ```
+
+
+
+
+dotnet ef migrations remove 

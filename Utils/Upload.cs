@@ -66,6 +66,9 @@ namespace Api_SistemaCursosDistancia.Utils
         public static string RetornarExtencao(string nomeArquivo)
         {
             //artuivo.jpeg
+            // [0]  [1]  [2]
+            // arq.uivo.jpeg = 3
+            // lenght(3) - 1 = 2
             string[] dados = nomeArquivo.Split('.');
             return dados[dados.Length - 1];
         }

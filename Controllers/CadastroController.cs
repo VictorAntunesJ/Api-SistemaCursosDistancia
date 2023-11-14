@@ -34,6 +34,8 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
+
+
                 _cadastroRepository.Insert(0, cadastro);
                 return Ok(cadastro);
             }
@@ -81,6 +83,10 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
+                if(id != cadastro.Id)
+                {
+                    return BadRequest();
+                }
 
                 var updateCadastro = _cadastroRepository.Update(id, cadastro);
                 return Ok(updateCadastro);
