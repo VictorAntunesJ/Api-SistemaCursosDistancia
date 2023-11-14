@@ -23,6 +23,7 @@ builder.Services.AddScoped<ICadastroRepository, CadastroRepository>();
 builder.Services.AddScoped<IAulaRepository, AulaRepository>();
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
 builder.Services.AddScoped<IModuloRepository, ModuloRepository>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
 
 
