@@ -254,6 +254,32 @@ No ASP.NET Core, a injeção de dependência é uma técnica fundamental para ge
 builder.Services.AddScoped<ICadastroRepository, CadastroRepository>();
 ```
 
+## Autenticação e Criptografia
+
+```sh
+Esta aplicação utiliza um sistema de autenticação seguro para proteger as informações dos usuários. A senha do usuário é armazenada de forma criptografada no banco de dados para garantir a segurança dos dados. Abaixo estão detalhes sobre como a autenticação é implementada:
+
+## Criptografia de Senha
+
+As senhas dos usuários são armazenadas de forma segura usando técnicas de criptografia. Isso significa que, mesmo em caso de violação de dados, as senhas não podem ser facilmente decifradas. A classe `Cadastro` no modelo é responsável por lidar com a criptografia e a comparação de senhas.
+
+## Login
+
+O endpoint de login (`/api/Login`) aceita as credenciais do usuário (email e senha), verifica a autenticidade no banco de dados e retorna um token de autenticação válido em caso de sucesso. Caso as credenciais sejam inválidas, é retornado um status `Unauthorized`.
+
+### Exemplo de Requisição de Login
+
+```http
+POST /api/Login
+Content-Type: application/json
+
+{
+  "email": "usuario@example.com",
+  "senha": "senhaSegura123"
+}
+
+```
+
 ## Referências
 
     https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
