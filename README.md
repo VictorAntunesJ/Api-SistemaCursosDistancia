@@ -381,10 +381,49 @@ e na interface ILoginRepository.
 Esta chave é usada em conjunto com o JWT (JSON Web Token) para garantir a autenticidade e integridade das informações trocadas entre a aplicação cliente e a API.
 
 
+ - Criação de Credenciais:
+
+As credenciais são criadas utilizando a chave de autenticação previamente gerada.
+
+```csharp
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
 
+ - Configuração do Token JWT:
+
+O token JWT é configurado com os seguintes parâmetros:
+- `Emissor:´ (issuer): "ApiCursoAdistancia.webAPI"
+- `Audiência:` (audience): "ApiCursoAdistancia.webAPI"
+- `Reivindicações:` (claims): Informações específicas do usuário, como email, ID e funções.
+- `Data:` de Expiração (expires): Configurada para expirar 30 minutos após a geração.
+- `Credenciais:` de Assinatura (signingCredentials): Utiliza as credenciais criadas anteriormente.
+
+```csharp
+      var meuToken = new JwtSecurityToken(
+          issuer: "ApiCursoAdistancia.webAPI",
+          audience: "ApiCursoAdistancia.webAPI",
+          claims: minhasClaims, 
+          expires: DateTime.Now.AddMinutes(30),
+          signingCredentials: creds
+      );
+
+  Retorno do Token JWT:
+      O token JWT gerado é retornado como uma string.
+
+```csharp
+      return new JwtSecurityTokenHandler().WriteToken(meuToken);
 
 
+Podemos facilmente decodificar um token JWT no site jwt.io para inspecionar as informações contidas no token.
+
+Copie o token JWT gerado durante o login.
+[Acesse jwt.io](https://jwt.io/)
+Cole o token que foi criado ao fazer o login no campo "Encoded" do site.
+O site automaticamente decodificará o token e exibirá as informações nas seções "Header", "Payload" e "Signature".
+
+Você poderá ver as reivindicações (claims) do token, como o email, o identificador do token (Jti), o papel (role),
+o cargo, entre outros, dependendo das informações que você incluiu na criação do token. Isso permite que você verifique
+se o token gerado está correto e contém as informações esperadas.
 ```
 
 ## Referências
