@@ -285,7 +285,7 @@ Content-Type: application/json
 
 # ---------------------------------------------------------------------------------------------------------- #
 
-## Adicionando Seguranca da Api - JWT (CONFIGURAÇÃO)
+## Adicionando Segurança da Api com JWT - 1º Parte ( - CONFIGURAÇÃO)
 
 ```sh
   # Instalando bibilhoteca - JWT
@@ -317,8 +317,46 @@ Content-Type: application/json
     };
 });
 
+```
+
+## Adicionando Segurança da Api com JWT - 2º Parte(AplicaCão)
+```sh
+Para garantir que a aplicação retorne um token em vez do cadastro ao realizar o login, 
+é necessário modificar os tipos de retorno dos métodos Logar na classe LoginRepository 
+e na interface ILoginRepository.
+
+  A LoginRepository/cadastro vai mudar
+
+  Antes
+      public Cadastro Logar(string email, string senha)
 
 
+  Depois
+      public string Logar(string email, string senha)
+      {
+          var cadastro = _cursoDistanciaContext.Cadastros.FirstOrDefault(x => x.Email == email);
+
+          if (cadastro != null)
+          {
+              // Verificar a senha usando BCrypt
+              bool confere = BCrypt.Net.BCrypt.Verify(senha, cadastro.Senha);
+              if (confere)
+              {
+                  // Retorna o token ou outra informação necessária
+                  return "Token"; // Substituir "Token" pela lógica real de geração do token
+              }
+          }
+
+          return null;
+      }
+
+# Modificações em ILoginRepository
+
+  Antes
+    cadastro Logar(string email, string senha);
+
+  Depois
+    string Logar(string email, string senha);
 ```
 
 ## Referências
