@@ -7,6 +7,7 @@ using Api_SistemaCursosDistancia.Context;
 using Api_SistemaCursosDistancia.Interfaces;
 using Api_SistemaCursosDistancia.Models;
 using Api_SistemaCursosDistancia.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api_SistemaCursosDistancia.Controllers
@@ -112,6 +113,8 @@ namespace Api_SistemaCursosDistancia.Controllers
         /// </summary>
         /// <param name="id">Id do usuário</param>
         /// <returns>Mensagem de exclusão</returns>
+        
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

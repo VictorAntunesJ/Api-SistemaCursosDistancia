@@ -89,6 +89,9 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseAuthorization();
+
+
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {

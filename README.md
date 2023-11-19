@@ -371,39 +371,39 @@ Content-Type: application/json
     no código fornecido, a chave está sendo gerada a partir da representação UTF-8 da string "ApiCursoAdistancia-chave-autenticacao".
 
 ```sh
-        var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ApiCursoAdistancia-chave-autenticacao"));
-´´´
-Esta chave é usada em conjunto com o JWT (JSON Web Token) para garantir a autenticidade e integridade das informações trocadas entre a aplicação cliente e a API.
+    var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ApiCursoAdistancia-chave-autenticacao"));
+```
 
+Esta chave é usada em conjunto com o JWT (JSON Web Token) para garantir a autenticidade e integridade das informações trocadas entre a aplicação cliente e a API.
 As credenciais são criadas utilizando a chave de autenticação previamente gerada.
 
 ```sh
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 ```
 
 - Configuração do Token JWT:
 
 O token JWT é configurado com os seguintes parâmetros:
-- `Emissor:´ (issuer): "ApiCursoAdistancia.webAPI"
+- `Emissor:` (issuer): "ApiCursoAdistancia.webAPI"
 - `Audiência:` (audience): "ApiCursoAdistancia.webAPI"
 - `Reivindicações:` (claims): Informações específicas do usuário, como email, ID e funções.
 - `Data:` de Expiração (expires): Configurada para expirar 30 minutos após a geração.
 - `Credenciais:` de Assinatura (signingCredentials): Utiliza as credenciais criadas anteriormente.
 
 ```sh
-      var meuToken = new JwtSecurityToken(
-          issuer: "ApiCursoAdistancia.webAPI",
-          audience: "ApiCursoAdistancia.webAPI",
-          claims: minhasClaims, 
-          expires: DateTime.Now.AddMinutes(30),
-          signingCredentials: creds
-      );
+  var meuToken = new JwtSecurityToken(
+  issuer: "ApiCursoAdistancia.webAPI",
+  audience: "ApiCursoAdistancia.webAPI",
+  claims: minhasClaims, 
+  expires: DateTime.Now.AddMinutes(30),
+  signingCredentials: creds
+);
 ```
 - Retorno do Token JWT:
     O token JWT gerado é retornado como uma string.
 
 ```sh
-      return new JwtSecurityTokenHandler().WriteToken(meuToken);
+  return new JwtSecurityTokenHandler().WriteToken(meuToken);
 ```      
 
 # Podemos facilmente decodificar um token JWT no site jwt.io para inspecionar as informações contidas no token.
@@ -417,17 +417,82 @@ Você poderá ver as reivindicações (claims) do token, como o email, o identif
 o cargo, entre outros, dependendo das informações que você incluiu na criação do token. Isso permite que você verifique
 se o token gerado está correto e contém as informações esperadas.
 
+# Bloqueio de Acesso a Endpoints com Autorização
+
+Este projeto implementa a autorização para restringir o acesso a determinados endpoints, usando o exemplo do endpoint DELETE na classe CadastroController.
+
+- Configuração na Classe CadastroController
+No arquivo CadastroController.cs, adicione a anotação [Authorize] acima da declaração do método 
+HttpDelete para restringir o acesso ao endpoint DELETE.
+
+```sh
+
+[Authorize]
+[HttpDelete("{id}")]
+public IActionResult Delete(int id)
+{
+    // Lógica para excluir o recurso com o ID fornecido
+    // ...
+
+    return NoContent(); // 204 No Content
+}
+
+```
+
+- Configuração na Classe Program
+No arquivo Program.cs, adicione a seguinte linha para habilitar a autorização na aplicação.
+
+```sh
+public static void Main(string[] args)
+{
+    // ...
+
+    app.UseAuthorization();
+
+    // ...
+}
+
+```
+
+# Testando a Aplicação com Postman
+1. Obtenha o Token de Autenticação:
+   -  Use o Swagger para gerar um token de autenticação.
+   -  Faça uma requisição POST para a URL de login do Swagger com as credenciais necessárias.
+2. Execute uma Requisição DELETE:
+   -  No Postman, crie uma requisição DELETE para o endpoint desejado.
+   -  Configure a URL da requisição usando o Swagger.
+   -  Adicione a autorização passando o token gerado como Bearer Token.
+   -  Execute a requisição.
+
+   Exemplo de URL DELETE no Postman:
+```sh
+  http://localhost:5029/Cadastro/2007
+
+```
+   Exemplo de cabeçalho de autorização no Postman:
+ ```sh
+  Authorization: BearerToken 
+  
+  Token [seu-token-aqui]
+
+ ```
+ 
+ O retorno esperado é o código de status 204 (No Content), indicando que a operação foi realizada com sucesso.
+
+
+
+
 ## Referências
 
-    https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
-    https://learn.microsoft.com/pt-br/sql/connect/ado-net/sql/?view=sql-server-ver16
-    https://www.nuget.org/
-    https://learn.microsoft.com/pt-br/ef/
+  https://learn.microsoft.com/pt-br/dotnet/framework/data/adonet/
+  https://learn.microsoft.com/pt-br/sql/connect/ado-net/sql/?view=sql-server-ver16
+  https://www.nuget.org/
+  https://learn.microsoft.com/pt-br/ef/
 
 ## Contribuições
 
 Você é bem-vindo para contribuir para este projeto. Sinta-se à vontade para abrir problemas (issues) ou enviar solicitações de pull (pull requests) para melhorar esta API.
 
 ```sh
-    Esta versão do README está organizada em seções claras, utiliza formatação Markdown para destacar código e links, e fornece informações detal
+  Esta versão do README está organizada em seções claras, utiliza formatação Markdown para destacar código e links, e fornece informações detal
 ```

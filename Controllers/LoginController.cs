@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api_SistemaCursosDistancia.Controllers
 {
+    
     [ApiController]
     [Route("api/[controller]")]
     public class LoginController : ControllerBase
