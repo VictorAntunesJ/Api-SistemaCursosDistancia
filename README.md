@@ -284,18 +284,15 @@ Content-Type: application/json
 ```
 
 ## Adicionando Segurança da Api com JWT - 1º Parte ( - CONFIGURAÇÃO)
+ - Instalando bibilhoteca - JWT
 
 ```sh
-   - Instalando bibilhoteca - JWT
-
   dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 7.0.0
-
-
-  - Implementando a conficuração
-
+```
+# Implementando a conficuração
   No arquivo onde você configura o serviço (Program.cs geralmente), adicione o seguinte código:
 
-
+```sh
   builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = "JwtBearer";
@@ -314,22 +311,20 @@ Content-Type: application/json
         ValidAudience = "ApiCursoAdistancia.webAPI",
     };
 });
-
 ```
 
 ## Adicionando Segurança da Api com JWT - 2º Parte(AplicaCão)
+    Para garantir que a aplicação retorne um token em vez do cadastro ao realizar o login, 
+    é necessário modificar os tipos de retorno dos métodos Logar na classe LoginRepository 
+    e na interface ILoginRepository.
+
+ - Modificacações em LoginRepository
 ```sh
-Para garantir que a aplicação retorne um token em vez do cadastro ao realizar o login, 
-é necessário modificar os tipos de retorno dos métodos Logar na classe LoginRepository 
-e na interface ILoginRepository.
-
-  A LoginRepository/cadastro vai mudar
-
-  Antes
+  `Antes:`
       public Cadastro Logar(string email, string senha)
 
 
-  Depois
+  `Depois:`
       public string Logar(string email, string senha)
       {
           var cadastro = _cursoDistanciaContext.Cadastros.FirstOrDefault(x => x.Email == email);
@@ -347,49 +342,46 @@ e na interface ILoginRepository.
 
           return null;
       }
+```
 
 - Modificações em ILoginRepository
 
-  Antes
+```sh
+  `Antes:`
     cadastro Logar(string email, string senha);
 
-  Depois
+  `Depois:`
     string Logar(string email, string senha);
+```
 
+- Criando credenciais JWT.
+    Ao autenticar um usuário, crie as credenciais JWT (claims) da seguinte maneira:
 
--Criando credenciais JWT.
-
-  Ao autenticar um usuário, crie as credenciais JWT (claims) da seguinte maneira:
-
-     ```csharp
-        var minhasClaims = new[]
-        {
-            new Claim(JwtRegisteredClaimNames.Email, cadastro.Email),
-            new Claim(JwtRegisteredClaimNames.Jti, cadastro.Id.ToString()),
-            new Claim(ClaimTypes.Role, "Adm"),
-        };
-
-
+```sh
+    var minhasClaims = new[]
+      {
+        new Claim(JwtRegisteredClaimNames.Email, cadastro.Email),
+        new Claim(JwtRegisteredClaimNames.Jti, cadastro.Id.ToString()),
+        new Claim(ClaimTypes.Role, "Adm"),
+      };
+```
 - Criando chave de autenticação
+  
+    A chave de autenticação é uma instância da classe SymmetricSecurityKey e é criada a partir de uma sequência de bytes que representam uma chave secreta.
+    no código fornecido, a chave está sendo gerada a partir da representação UTF-8 da string "ApiCursoAdistancia-chave-autenticacao".
 
-  A chave de autenticação é uma instância da classe SymmetricSecurityKey e é criada a partir de uma sequência de bytes que representam uma chave secreta. No código fornecido, a chave está sendo gerada a partir da representação UTF-8 da string "ApiCursoAdistancia-chave-autenticacao".
-
-```csharp
+```sh
         var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ApiCursoAdistancia-chave-autenticacao"));
-
-
+´´´
 Esta chave é usada em conjunto com o JWT (JSON Web Token) para garantir a autenticidade e integridade das informações trocadas entre a aplicação cliente e a API.
-
-
- - Criação de Credenciais:
 
 As credenciais são criadas utilizando a chave de autenticação previamente gerada.
 
-```csharp
+```sh
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+```
 
-
- - Configuração do Token JWT:
+- Configuração do Token JWT:
 
 O token JWT é configurado com os seguintes parâmetros:
 - `Emissor:´ (issuer): "ApiCursoAdistancia.webAPI"
@@ -398,7 +390,7 @@ O token JWT é configurado com os seguintes parâmetros:
 - `Data:` de Expiração (expires): Configurada para expirar 30 minutos após a geração.
 - `Credenciais:` de Assinatura (signingCredentials): Utiliza as credenciais criadas anteriormente.
 
-```csharp
+```sh
       var meuToken = new JwtSecurityToken(
           issuer: "ApiCursoAdistancia.webAPI",
           audience: "ApiCursoAdistancia.webAPI",
@@ -406,15 +398,15 @@ O token JWT é configurado com os seguintes parâmetros:
           expires: DateTime.Now.AddMinutes(30),
           signingCredentials: creds
       );
+```
+- Retorno do Token JWT:
+    O token JWT gerado é retornado como uma string.
 
-  Retorno do Token JWT:
-      O token JWT gerado é retornado como uma string.
-
-```csharp
+```sh
       return new JwtSecurityTokenHandler().WriteToken(meuToken);
+```      
 
-
-Podemos facilmente decodificar um token JWT no site jwt.io para inspecionar as informações contidas no token.
+# Podemos facilmente decodificar um token JWT no site jwt.io para inspecionar as informações contidas no token.
 
 Copie o token JWT gerado durante o login.
 [Acesse jwt.io](https://jwt.io/)
@@ -424,7 +416,6 @@ O site automaticamente decodificará o token e exibirá as informações nas se�
 Você poderá ver as reivindicações (claims) do token, como o email, o identificador do token (Jti), o papel (role),
 o cargo, entre outros, dependendo das informações que você incluiu na criação do token. Isso permite que você verifique
 se o token gerado está correto e contém as informações esperadas.
-```
 
 ## Referências
 
