@@ -8,6 +8,7 @@ using Api_SistemaCursosDistancia.Context;
 using Api_SistemaCursosDistancia.Controllers;
 using Api_SistemaCursosDistancia.Interfaces;
 using Api_SistemaCursosDistancia.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Api_SistemaCursosDistancia.Repositories
 {
@@ -44,6 +45,10 @@ namespace Api_SistemaCursosDistancia.Repositories
 
                         new Claim("Cargo", "Adm")
                     };
+
+                    //Criamos as chaves
+                    var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ApiCursoAdistancia-chave-autenticacao"));
+
 
                     
                 }

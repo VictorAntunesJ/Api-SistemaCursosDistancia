@@ -370,6 +370,16 @@ e na interface ILoginRepository.
         };
 
 
+- Criando chave de autenticação
+
+  A chave de autenticação é uma instância da classe SymmetricSecurityKey e é criada a partir de uma sequência de bytes que representam uma chave secreta. No código fornecido, a chave está sendo gerada a partir da representação UTF-8 da string "ApiCursoAdistancia-chave-autenticacao".
+
+```csharp
+        var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ApiCursoAdistancia-chave-autenticacao"));
+
+
+Esta chave é usada em conjunto com o JWT (JSON Web Token) para garantir a autenticidade e integridade das informações trocadas entre a aplicação cliente e a API.
+
 
 
 
