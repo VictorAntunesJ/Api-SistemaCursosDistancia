@@ -17,6 +17,7 @@ namespace Api_SistemaCursosDistancia.Controllers
     {
 
         private readonly ICadastroRepository _cadastroRepository;
+
         public CadastroController(ICadastroRepository cadastroRepository)
         {
             _cadastroRepository = cadastroRepository;
@@ -34,6 +35,10 @@ namespace Api_SistemaCursosDistancia.Controllers
         {
             try
             {
+
+                cadastro.Senha = BCrypt.Net.BCrypt.HashPassword(cadastro.Senha);
+
+                //cadastro.Senha = BCryptNext.HashPassword(cadastro.Senha);
 
 
                 _cadastroRepository.Insert(0, cadastro);
@@ -88,9 +93,10 @@ namespace Api_SistemaCursosDistancia.Controllers
                     return BadRequest();
                 }
 
+                cadastro.Senha = BCrypt.Net.BCrypt.HashPassword(cadastro.Senha);
+
                 var updateCadastro = _cadastroRepository.Update(id, cadastro);
                 return Ok(updateCadastro);
-
             }
             catch (System.Exception ex)
             {

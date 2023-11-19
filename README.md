@@ -278,6 +278,47 @@ Content-Type: application/json
   "senha": "senhaSegura123"
 }
 
+
+
+
+```
+
+# ---------------------------------------------------------------------------------------------------------- #
+
+## Adicionando Seguranca da Api - JWT (CONFIGURAÇÃO)
+
+```sh
+  # Instalando bibilhoteca - JWT
+
+  dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 7.0.0
+
+
+  # Implementando a conficuração
+
+  No arquivo onde você configura o serviço (Program.cs geralmente), adicione o seguinte código:
+
+
+  builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "JwtBearer";
+    options.DefaultChallengeScheme = "JwtBearer";
+})
+.AddJwtBearer("JwtBearer", options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ApiCursoAdistancia-chave-altenticacao")),
+        ClockSkew = TimeSpan.FromMinutes(30),
+        ValidIssuer = "ApiCursoAdistancia.webAPI",
+        ValidAudience = "ApiCursoAdistancia.webAPI",
+    };
+});
+
+
+
 ```
 
 ## Referências

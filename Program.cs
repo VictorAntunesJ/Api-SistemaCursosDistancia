@@ -7,6 +7,7 @@ using Api_SistemaCursosDistancia.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +53,28 @@ builder.Services.AddSwaggerGen(c=>
     var xmlArquivo = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlArquivo));
 });
+
+//config JWT
+    
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "JwtBearer";
+    options.DefaultChallengeScheme = "JwtBearer";
+})
+.AddJwtBearer("JwtBearer", options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ApiCursoAdistancia-chave-altenticacao")),
+        ClockSkew = TimeSpan.FromMinutes(30),
+        ValidIssuer = "ApiCursoAdistancia.webAPI",
+        ValidAudience = "ApiCursoAdistancia.webAPI",
+    };
+});
+
 
 var app = builder.Build();
 
