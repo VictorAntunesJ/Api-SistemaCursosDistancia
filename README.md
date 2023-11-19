@@ -283,17 +283,15 @@ Content-Type: application/json
 
 ```
 
-# ---------------------------------------------------------------------------------------------------------- #
-
 ## Adicionando Segurança da Api com JWT - 1º Parte ( - CONFIGURAÇÃO)
 
 ```sh
-  # Instalando bibilhoteca - JWT
+   - Instalando bibilhoteca - JWT
 
   dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 7.0.0
 
 
-  # Implementando a conficuração
+  - Implementando a conficuração
 
   No arquivo onde você configura o serviço (Program.cs geralmente), adicione o seguinte código:
 
@@ -350,13 +348,33 @@ e na interface ILoginRepository.
           return null;
       }
 
-# Modificações em ILoginRepository
+- Modificações em ILoginRepository
 
   Antes
     cadastro Logar(string email, string senha);
 
   Depois
     string Logar(string email, string senha);
+
+
+-Criando credenciais JWT.
+
+  Ao autenticar um usuário, crie as credenciais JWT (claims) da seguinte maneira:
+
+     ```csharp
+        var minhasClaims = new[]
+        {
+            new Claim(JwtRegisteredClaimNames.Email, cadastro.Email),
+            new Claim(JwtRegisteredClaimNames.Jti, cadastro.Id.ToString()),
+            new Claim(ClaimTypes.Role, "Adm"),
+        };
+
+
+
+
+
+
+
 ```
 
 ## Referências
@@ -373,8 +391,3 @@ Você é bem-vindo para contribuir para este projeto. Sinta-se à vontade para a
 ```sh
     Esta versão do README está organizada em seções claras, utiliza formatação Markdown para destacar código e links, e fornece informações detal
 ```
-
-
-
-
-dotnet ef migrations remove 

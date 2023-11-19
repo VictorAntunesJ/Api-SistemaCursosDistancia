@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Api_SistemaCursosDistancia.Context;
 using Api_SistemaCursosDistancia.Controllers;
@@ -30,23 +32,24 @@ namespace Api_SistemaCursosDistancia.Repositories
                 // Verificar a senha usando BCrypt
                 bool confere = BCrypt.Net.BCrypt.Verify(senha, cadastro.Senha);
                 if (confere)
-                    return null;
+                {
+                    // Criar as credenciais do JWT
+
+                    // Definimos as Claims 
+                    var minhasClaims = new[]
+                    {
+                        new Claim(JwtRegisteredClaimNames.Email, cadastro.Email),
+                        new Claim(JwtRegisteredClaimNames.Jti, cadastro.Id.ToString()),
+                        new Claim(ClaimTypes.Role, "Adm"),
+
+                        new Claim("Cargo", "Adm")
+                    };
+
+                    
+                }
+                    
             }
             return null;
         }
     }
 }
-// //Criar as credenciais do JWT
-
-// //Definimos as Claims
-// var minhasClaims = new[]
-// {
-//     new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-//     new Claim(JwtRegisteredClaimNames.Jti, usuario.Id.ToString()),
-//     new Claim(ClaimTypes.Role, "Adm"),
-
-//     new Claim ("Cargo", "Adm")
-// };
-
-// //Criando as chaves.
-// var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(""))
