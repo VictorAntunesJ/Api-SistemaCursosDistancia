@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api-SistemaCursosDistancia</name>
+    </assembly>
+    <members>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.AulaController.Create(Api_SistemaCursosDistancia.Models.Aula,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Cadastrar aula na aplicação
+            </summary>
+            <param name="aula">Dados da aula</param>
+            /// <param name="escolhaArquivo">Todas informações de um aula</param>
+            <returns>Dados da aula cadastrado</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.AulaController.Listar">
+            <summary>
+            Listar todos os dados da aplicação.
+            </summary>
+            <returns>Todos dados cadastrados.</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.AulaController.Atualizar(System.Int32,Api_SistemaCursosDistancia.Models.Aula)">
+            <summary>
+            Alterar dados da aula.
+            </summary>
+            <param name="id"></param>
+            <param name="aula">Todas informações de um usuário</param>
+            <returns>Usuario Alterado</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.AulaController.Delete(System.Int32)">
+            <summary>
+            Excluir um usuário da aplicação.
+            </summary>
+            <param name="id">Id do usuário</param>
+            <returns>Mensagem de exclusão</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.CadastroController.Create(Api_SistemaCursosDistancia.Models.Cadastro)">
+            <summary>
+            Cadastrar usuário na aplicação
+            </summary>
+            <param name="cadastro">Dados do usuário</param>
+            <returns>Dados do usuário cadastrados</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.CadastroController.Listar">
+             <summary>
+             Listar todos os dados da aplicação
+             </summary>
+            <param>Dados do usuário</param>
+             <returns>Dados do usuários cadastrados</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.CadastroController.Atualizar(System.Int32,Api_SistemaCursosDistancia.Models.Cadastro)">
+            <summary>
+            Alterar dados da aula.
+            </summary>
+            <param name="id"></param>
+            <param name="cadastro">Todas informações de um usuário</param>
+            <returns>Usuario Alterado</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.CadastroController.Delete(System.Int32)">
+            <summary>
+            Excluir um usuário da aplicação.
+            </summary>
+            <param name="id">Id do usuário</param>
+            <returns>Mensagem de exclusão</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.CursoController.Create(Api_SistemaCursosDistancia.Models.Curso)">
+            <summary>
+            Cadastrar usuário na aplicação
+            </summary>
+            <param name="curso">Dados do usuário</param>
+            <returns>Dados do usuário cadastrados</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.CursoController.Listar">
+             <summary>
+             Listar todos os dados da aplicação
+             </summary>
+            <param>Dados do usuário</param>
+             <returns>Dados do usuários cadastrados</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.CursoController.Atualizar(System.Int32,Api_SistemaCursosDistancia.Models.Curso)">
+            <summary>
+            Alterar dados da aula.
+            </summary>
+            <param name="id"></param>
+            <param name="curso">Todas informações de um usuário</param>
+            <returns>Usuario Alterado</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.CursoController.Delete(System.Int32)">
+            <summary>
+            Excluir um usuário da aplicação.
+            </summary>
+            <param name="id">Id do usuário</param>
+            <returns>Mensagem de exclusão</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.ModuloController.Create(Api_SistemaCursosDistancia.Models.Modulo)">
+            <summary>
+            Cadastrar modulo na aplicação
+            </summary>
+            <param name="modulo">Dados do usuário</param>
+            <returns>Dados do modulos cadastrados</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.ModuloController.Listar">
+             <summary>
+             Listar todos os dados da aplicação
+             </summary>
+            <param>Dados do usuário</param>
+             <returns>Dados do modulos cadastrados</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.ModuloController.Atualizar(System.Int32,Api_SistemaCursosDistancia.Models.Modulo)">
+            <summary>
+            Alterar dados do modulo.
+            </summary>
+            <param name="id"></param>
+            <param name="modulo">Todas informações de um modulo.</param>
+            <returns>Usuario Alterado</returns>
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Controllers.ModuloController.Delete(System.Int32)">
+            <summary>
+            Excluir um modulo da aplicação.
+            </summary>
+            <param name="id">Id do usuário</param>
+            <returns>Mensagem de exclusão</returns>
+        </member>
+        <member name="T:Api_SistemaCursosDistancia.Migrations.ApiCursoDistancia">
+            <inheritdoc />
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Migrations.ApiCursoDistancia.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Migrations.ApiCursoDistancia.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Api_SistemaCursosDistancia.Migrations.ApiCursoDistancia.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
